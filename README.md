@@ -1,1 +1,1 @@
-# movies-explorer-frontend
+Ссылка на фронтенд-часть приложения: https://movie.julias.nomoredomainsrocks.ru
