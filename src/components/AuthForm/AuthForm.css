@@ -1,0 +1,116 @@
+.auth {
+  margin: 70px auto;
+  width: 396px;
+}
+
+.auth__logo {
+  width: 38px;
+  height: 38px;
+  object-fit: contain;
+  object-position: center;
+  display: block;
+}
+
+.auth__title {
+  margin: 40px 0;
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 29px;
+}
+
+.auth__form {
+  height: 100%;
+  width: 396px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.auth__form-element {
+  margin: 0;
+  padding: 0;
+  border: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.auth__form-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.auth__form-label {
+  font-size: 10px;
+  line-height: 12px;
+  font-weight: 400;
+  color: #a0a0a0;
+  padding-bottom: 10px;
+}
+
+.auth__form-input {
+  margin: 0;
+  padding: 15px;
+  box-sizing: border-box;
+  border: none;
+  border-radius: 8px;
+  height: 46px;
+  background-color: #f9f9f9;
+  font-size: 13px;
+  line-height: 16px;
+  font-weight: 400;
+}
+
+.auth__form-input::placeholder {
+  color: #000;
+}
+
+.auth__form-input_error_active::placeholder {
+  color: #ff4062;
+}
+
+.auth__form-input-err-text {
+  font-size: 10px;
+  line-height: 12px;
+  font-weight: 400;
+  color: #ff4062;
+  padding-top: 10px;
+}
+
+.auth__submit-btn {
+  height: 45px;
+  margin-top: 69px;
+  color: #fff;
+  font-size: 14px;
+  background-color: #000;
+  border: none;
+  border-radius: 3px;
+}
+
+.auth__to-signin {
+  padding-top: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.auth__text {
+  margin: 0;
+  color: #a0a0a0;
+  font-size: 14px;
+  line-height: 17px;
+  font-weight: 400;
+}
+
+.auth__redirect-btn {
+  font-size: 14px;
+  line-height: 17px;
+  font-weight: 400;
+  color: #000;
+  text-decoration: none;
+}
+
+.auth__empty-separator {
+  margin-top: 121px;
+}

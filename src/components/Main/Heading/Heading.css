@@ -1,0 +1,13 @@
+.heading__title {
+  font-size: 22px;
+  font-weight: 400;
+  line-height: 27px;
+  letter-spacing: -0.04em;
+  margin: 0;
+}
+
+.heading__separator {
+  margin: 0 auto;
+  margin: 23px 0 70px;
+  border-bottom: 1px solid #000;
+}
