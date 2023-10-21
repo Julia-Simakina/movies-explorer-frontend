@@ -41,8 +41,43 @@
   color: #000;
   text-decoration-line: none;
 }
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1023px) {
   .footer {
     padding: 59px 30px 20px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .footer {
+    padding: 74px 10px 20px;
+  }
+
+  .footer__title {
+    font-size: 12px;
+    line-height: 15px;
+  }
+
+  .footer__container {
+    padding-top: 29px;
+    flex-direction: column-reverse;
+    align-items: center;
+    gap: 30px;
+  }
+
+  .footer__nav-bar {
+    flex-direction: column;
+    align-items: center;
+    gap: 7px;
+  }
+
+  .footer__year {
+    font-size: 12px;
+    line-height: 15px;
+    color: #a0a0a0;
+  }
+
+  .footer__nav-link {
+    font-size: 12px;
+    line-height: 15px;
   }
 }
