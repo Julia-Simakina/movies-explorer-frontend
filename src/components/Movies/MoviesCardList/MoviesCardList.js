@@ -19,7 +19,7 @@ function MoviesCardList({ savedMovies }) {
         ))}
       </ul>
       {!savedMovies && (
-        <button className='movies-list__button' type='button'>
+        <button className='movies-list__button movies-list__button_type_unactive' type='button'>
           Ещё
         </button>
       )}

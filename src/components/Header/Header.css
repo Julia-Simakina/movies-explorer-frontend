@@ -160,4 +160,16 @@
     height: 2.5px;
     top: 9px;
   }
+  .header__auth-bar {
+    gap: 14px;
+  }
+
+  .header__auth-link {
+    font-size: 10px;
+    line-height: 16px;
+  }
+
+  .header__auth-link_type_signin {
+    padding: 5px 12px;
+  }
 }

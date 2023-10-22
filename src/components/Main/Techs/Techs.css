@@ -47,24 +47,55 @@
   letter-spacing: -0.04em;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1023px) {
   .techs {
     padding: 90px 50px;
   }
+
   .techs__title {
     padding-top: 10px;
   }
+
   .techs__subtitle {
     padding-top: 22px;
     font-size: 12px;
     line-height: 18px;
   }
+
   .techs__list {
     padding-top: 83px;
   }
+
   .techs__list-item {
+    padding: 21px 0 21px;
     width: 84px;
     font-size: 12px;
     line-height: 15px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .techs {
+    padding: 70px 18px;
+    background-color: #fff;
+  }
+
+  .techs__title {
+    padding-top: 0px;
+    font-size: 30px;
+    line-height: 36px;
+  }
+
+  .techs__subtitle {
+    padding-top: 24px;
+    font-size: 11px;
+    line-height: 16px;
+  }
+
+  .techs__list {
+    padding-top: 50px;
+    display: grid;
+    grid-template-columns: min-content min-content;
+    gap: 10px;
   }
 }

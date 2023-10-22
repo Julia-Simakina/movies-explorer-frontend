@@ -55,7 +55,7 @@
   color: #000;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1023px) {
   .about-me {
     padding: 90px 50px;
   }
@@ -87,5 +87,42 @@
 
   .about-me__githab {
     margin-top: 105px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .about-me {
+    padding: 70px 14px 54px;
+  }
+
+  .about-me__avatar {
+    width: 292px;
+    height: 352px;
+    align-self: center;
+  }
+
+  .about-me__student-info {
+    flex-direction: column-reverse;
+  }
+
+  .about-me__name {
+    font-size: 30px;
+    line-height: 36px;
+    padding-top: 40px;
+  }
+
+  .about-me__prof {
+    padding-top: 20px;
+    font-size: 11px;
+    line-height: 16px;
+  }
+
+  .about-me__info {
+    font-size: 11px;
+    line-height: 16px;
+  }
+
+  .about-me__githab {
+    margin-top: 55px;
   }
 }

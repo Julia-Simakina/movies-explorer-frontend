@@ -10,7 +10,7 @@ function Header({ name, toggleSidebar }) {
   return name === 'logged' ? (
     <header className={`header ${pathname === '/' && 'header_background_pink'}`}>
       <div className='header__content'>
-        <Link href='/'>
+        <Link to='/'>
           <img src={logo} alt='Логотип' className='header__logo' />
         </Link>
         <button className='header__burger' type='button' onClick={toggleSidebar}>
@@ -22,14 +22,14 @@ function Header({ name, toggleSidebar }) {
   ) : (
     <header className={`header ${pathname === '/' && 'header_background_pink'}`}>
       <div className='header__content'>
-        <Link href='/'>
+        <Link to='/'>
           <img src={logo} alt='Логотип' className='header__logo' />
         </Link>
         <div className='header__auth-bar'>
-          <Link href='/signup' className='header__auth-link'>
+          <Link to='/signup' className='header__auth-link'>
             Регистрация
           </Link>
-          <Link href='/signin' className='header__auth-link header__auth-link_type_signin'>
+          <Link to='/signin' className='header__auth-link header__auth-link_type_signin'>
             Войти
           </Link>
         </div>

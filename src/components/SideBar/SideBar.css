@@ -13,12 +13,13 @@
 
 .sidebar__container {
   background-color: #fff;
-  padding: 159px 90px 92px;
+  padding: 159px 0 92px;
   position: absolute;
   top: 0;
   right: 0;
   height: 100%;
-  width: 520px;
+  max-width: 520px;
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -63,4 +64,20 @@
   text-decoration-color: #000;
   text-decoration-thickness: 1.8px;
   text-underline-offset: 8px;
+}
+
+@media screen and (max-width: 767px) {
+  .sidebar__container {
+    max-width: 520px;
+    width: 100%;
+  }
+  .sidebar__button {
+    top: 14px;
+    right: 14px;
+  }
+
+  .sidebar__container {
+    background-color: #fff;
+    padding: 144px 0px 48px;
+  }
 }

@@ -7,7 +7,7 @@
   list-style: none;
   gap: 40px;
   padding: 0;
-  margin: 70px 0 110px;
+  margin: 0 0 110px;
 }
 
 .about-project__descriptions-item {
@@ -70,7 +70,7 @@
   margin-top: 14px;
   color: #a0a0a0;
 }
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1023px) {
   .about-project {
     padding: 90px 50px;
   }
@@ -83,5 +83,45 @@
 
   .about-project__descriptions {
     margin-bottom: 93px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .about-project {
+    padding: 70px 18px;
+  }
+
+  .about-project__descriptions {
+    gap: 56px;
+    flex-direction: column;
+    margin-bottom: 60px;
+  }
+  .about-project__descriptions-title {
+    font-size: 18px;
+    line-height: 22px;
+  }
+
+  .about-project__descriptions-text {
+    margin-top: 16px;
+    font-size: 11px;
+    line-height: 16px;
+  }
+
+  .about-project__graphs {
+    grid-template-columns: 2fr 4fr;
+  }
+
+  .about-project__figure {
+    margin: 0;
+    padding: 10px 0;
+    height: 35px;
+    font-size: 11px;
+    line-height: 13px;
+  }
+
+  .about-project__figcaption {
+    font-size: 11px;
+    line-height: 13px;
+    margin-top: 10px;
   }
 }

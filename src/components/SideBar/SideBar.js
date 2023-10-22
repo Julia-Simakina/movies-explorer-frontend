@@ -29,7 +29,7 @@ function SideBar({ isOpen, toggleSidebar }) {
           </ul>
         </nav>
         <div className='profile'>
-          <Link className='profile__btn'>
+          <Link className='profile__btn' to='/profile'>
             Аккаунт
             <div className='profile__logo'></div>
           </Link>

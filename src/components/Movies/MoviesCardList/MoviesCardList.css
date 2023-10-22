@@ -26,6 +26,11 @@
   font-weight: 500;
 }
 
+.movies-list__button_type_unactive {
+  border: 1px solid #e8e8e8;
+  background-color: #fff;
+}
+
 @media screen and (max-width: 1023px) {
   .movies-list {
     padding: 0 30px 100px;

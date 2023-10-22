@@ -7,7 +7,18 @@
 }
 
 .heading__separator {
-  margin: 0 auto;
   margin: 23px 0 70px;
   border-bottom: 1px solid #000;
+}
+
+@media screen and (max-width: 767px) {
+  .heading__title {
+    font-size: 18px;
+    line-height: 22px;
+  }
+
+  .heading__separator {
+    margin: 28px 0 60px;
+    border-bottom: 1px solid #000;
+  }
 }

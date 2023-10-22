@@ -1,6 +1,13 @@
 .auth {
-  margin: 70px auto;
+  padding: 70px 0;
+  margin: 0 auto;
+  box-sizing: border-box;
   width: 396px;
+
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .auth__logo {
@@ -78,6 +85,7 @@
 }
 
 .auth__submit-btn {
+  width: 396px;
   height: 45px;
   margin-top: 69px;
   color: #fff;
@@ -85,6 +93,17 @@
   background-color: #000;
   border: none;
   border-radius: 3px;
+  opacity: 1;
+}
+
+.auth__submit-btn:hover {
+  opacity: 0.8;
+  cursor: pointer;
+}
+
+.auth__submit-btn_tupe_unactive {
+  background-color: #f8f8f8;
+  color: #c2c2c2;
 }
 
 .auth__to-signin {
@@ -93,24 +112,59 @@
   align-items: center;
   justify-content: center;
   gap: 6px;
+  font-size: 14px;
+  line-height: 17px;
 }
 
 .auth__text {
   margin: 0;
   color: #a0a0a0;
-  font-size: 14px;
-  line-height: 17px;
   font-weight: 400;
 }
 
 .auth__redirect-btn {
-  font-size: 14px;
-  line-height: 17px;
   font-weight: 400;
   color: #000;
   text-decoration: none;
+  opacity: 1;
+}
+
+.auth__redirect-btn:hover {
+  opacity: 0.7;
 }
 
 .auth__empty-separator {
   margin-top: 121px;
+}
+
+@media screen and (max-width: 1023px) {
+  .auth {
+    padding: 232px 0;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .auth {
+    margin: 0 auto;
+    padding: 58px 0 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 320px;
+  }
+
+  .auth__form {
+    width: 260px;
+  }
+
+  .auth__submit-btn {
+    width: 260px;
+  }
+  .auth__to-signin {
+    font-size: 12px;
+    line-height: 15px;
+  }
+  .auth__submit-container {
+    flex-direction: end;
+  }
 }

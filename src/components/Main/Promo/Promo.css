@@ -25,8 +25,25 @@
   letter-spacing: -0.04em;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1023px) {
   .promo {
     height: 784px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .promo {
+    height: 570px;
+  }
+
+  .promo__logo {
+    width: 248px;
+    height: 248px;
+  }
+
+  .promo__title {
+    width: 300px;
+    font-size: 31px;
+    line-height: 39px;
   }
 }

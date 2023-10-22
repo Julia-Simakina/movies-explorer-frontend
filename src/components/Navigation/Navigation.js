@@ -23,7 +23,7 @@ function Navigation() {
       </nav>
 
       <div className='profile'>
-        <Link className='profile__btn'>
+        <Link className='profile__btn' to='/profile'>
           Аккаунт
           <div className={`profile__logo ${pathname === '/' && 'profile__logo_type_pink'}`}></div>
         </Link>

@@ -8,8 +8,8 @@ function Profile({ toggleSidebar }) {
       <Header name='logged' toggleSidebar={toggleSidebar} />
       <main className='profile'>
         <section className='profile__content'>
-          <h2 className='profile__title'>Привет, пользователь! </h2>
           <form className='form'>
+            <h2 className='profile__title'>Привет, пользователь! </h2>
             <fieldset className='form__container'>
               <div className='form__element'>
                 <label htmlFor='' className='form__label'>
@@ -23,14 +23,16 @@ function Profile({ toggleSidebar }) {
                 </label>
                 <input type='text' className='form__input' placeholder='pochta@yandex.ru' />
               </div>
-              <button className='form__edit-btn' type='submit'>
-                Редактировать
-              </button>
             </fieldset>
           </form>
-          <Link to='/' className='profile__exit'>
-            Выйти из аккаунта
-          </Link>
+          <div className='profile__edit'>
+            <button className='profile__edit-btn' type='submit'>
+              Редактировать
+            </button>
+            <Link to='/' className='profile__exit'>
+              Выйти из аккаунта
+            </Link>
+          </div>
         </section>
       </main>
     </>
