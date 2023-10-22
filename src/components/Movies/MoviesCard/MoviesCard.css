@@ -81,7 +81,7 @@
   box-sizing: border-box;
 }
 
-@media screen and (max-width: 1023px) {
+@media screen and (max-width: 1279px) {
   .card-movie__img {
     width: 339px;
     height: 190px;

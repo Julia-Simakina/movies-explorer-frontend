@@ -46,6 +46,10 @@
   display: flex;
   flex-direction: column;
 }
+.auth__container {
+  display: flex;
+  flex-direction: column;
+}
 
 .auth__form-label {
   font-size: 10px;

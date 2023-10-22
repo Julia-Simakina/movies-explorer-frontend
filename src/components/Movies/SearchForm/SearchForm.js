@@ -23,7 +23,7 @@ function SearchForm() {
           </label>
         </div>
       </form>
-      <div className='search-form__separator'></div>
+      <div className='search-form-section__separator'></div>
     </section>
   );
 }

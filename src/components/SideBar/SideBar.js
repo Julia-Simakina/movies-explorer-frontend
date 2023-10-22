@@ -16,7 +16,7 @@ function SideBar({ isOpen, toggleSidebar }) {
             <li>
               <NavLink
                 to='/movies'
-                className='nav__link  nav__link_type_sidebar sidebar__link_type_active-underline'
+                className='nav__link  nav__link_type_sidebar nav__link_type_active-underline'
               >
                 Фильмы
               </NavLink>

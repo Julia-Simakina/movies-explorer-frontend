@@ -15,7 +15,7 @@ function AuthForm({ children, title, logged }) {
 
   return (
     <section className='auth'>
-      <div className='auth__form-container'>
+      <div className='auth__container'>
         <Link href='/'>
           <img src={logo} alt='Логотип' className='auth__logo' />
         </Link>
