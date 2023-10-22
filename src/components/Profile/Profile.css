@@ -72,6 +72,10 @@
   border: none;
   background-color: #fff;
 }
+.profile__edit-btn:hover {
+  opacity: 0.7;
+  cursor: pointer;
+}
 
 .profile__exit {
   font-size: 13px;
@@ -80,6 +84,9 @@
   text-align: center;
   text-decoration: none;
   color: #ff4062;
+}
+.profile__exit:hover {
+  opacity: 0.7;
 }
 
 @media screen and (max-width: 1023px) {

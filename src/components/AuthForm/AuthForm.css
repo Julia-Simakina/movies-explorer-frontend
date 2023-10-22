@@ -18,6 +18,10 @@
   display: block;
 }
 
+.auth__logo:hover {
+  opacity: 0.8;
+}
+
 .auth__title {
   margin: 40px 0;
   font-size: 24px;
@@ -73,7 +77,7 @@
 }
 
 .auth__form-input::placeholder {
-  color: #000;
+  color: #a0a0a0;
 }
 
 .auth__form-input_error_active::placeholder {
@@ -167,8 +171,5 @@
   .auth__to-signin {
     font-size: 12px;
     line-height: 15px;
-  }
-  .auth__submit-container {
-    flex-direction: end;
   }
 }

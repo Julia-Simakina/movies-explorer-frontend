@@ -13,7 +13,8 @@ function Login() {
             type='text'
             id='name'
             className='auth__form-input'
-            placeholder='pochta@yandex.ru|'
+            placeholder='Введите E-mail'
+            required
           />
           <span></span>
         </div>
@@ -21,7 +22,13 @@ function Login() {
           <label htmlFor='name' className='auth__form-label'>
             Пароль
           </label>
-          <input type='text' id='name' className='auth__form-input ' placeholder='' />
+          <input
+            type='text'
+            id='name'
+            className='auth__form-input '
+            placeholder='Введите пароль'
+            required
+          />
           <span></span>
         </div>
       </AuthForm>

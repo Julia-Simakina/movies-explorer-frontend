@@ -27,9 +27,17 @@
   font-weight: 500;
 }
 
+.movies-list__button:hover {
+  cursor: pointer;
+}
+
 .movies-list__button_type_unactive {
   border: 1px solid #e8e8e8;
   background-color: #fff;
+}
+
+.movies-list__button_type_unactive:hover {
+  cursor: auto;
 }
 
 @media screen and (max-width: 1279px) {

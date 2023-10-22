@@ -10,7 +10,13 @@ function Register() {
           <label htmlFor='name' className='auth__form-label'>
             Имя
           </label>
-          <input type='text' id='name' className='auth__form-input' placeholder='Юлия' />
+          <input
+            type='text'
+            id='name'
+            className='auth__form-input'
+            placeholder='Введите имя'
+            required
+          />
           <span className='auth__form-input-err-text'></span>
         </div>
         <div className='auth__form-container'>
@@ -21,7 +27,8 @@ function Register() {
             type='text'
             id='name'
             className='auth__form-input'
-            placeholder='pochta@yandex.ru|'
+            placeholder='Введите E-mail'
+            required
           />
           <span className='auth__form-input-err-text'></span>
         </div>
@@ -33,7 +40,8 @@ function Register() {
             type='text'
             id='name'
             className='auth__form-input auth__form-input_error_active '
-            placeholder='••••••••••••••'
+            placeholder='Введите пароль'
+            required
           />
           <span className='auth__form-input-err-text'>Что-то пошло не так...</span>
         </div>
