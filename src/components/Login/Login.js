@@ -27,6 +27,8 @@ function Login() {
             id='name'
             className='auth__form-input '
             placeholder='Введите пароль'
+            minlength='5'
+            maxlength='30'
             required
           />
           <span></span>

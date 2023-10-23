@@ -7,8 +7,10 @@ function Movies({ toggleSidebar }) {
   return (
     <>
       <Header name='logged' toggleSidebar={toggleSidebar} />
-      <SearchForm />
-      <MoviesCardList />
+      <main>
+        <SearchForm />
+        <MoviesCardList />
+      </main>
       <Footer />
     </>
   );

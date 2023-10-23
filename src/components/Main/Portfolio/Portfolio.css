@@ -24,6 +24,10 @@
   box-sizing: border-box;
 }
 
+.portfolio__project:last-of-type {
+  border-bottom: none;
+}
+
 .portfolio__project-link {
   width: 100%;
   display: flex;

@@ -15,6 +15,8 @@ function Register() {
             id='name'
             className='auth__form-input'
             placeholder='Введите имя'
+            minlength='2'
+            maxlength='30'
             required
           />
           <span className='auth__form-input-err-text'></span>
@@ -41,6 +43,8 @@ function Register() {
             id='name'
             className='auth__form-input auth__form-input_error_active '
             placeholder='Введите пароль'
+            minlength='5'
+            maxlength='30'
             required
           />
           <span className='auth__form-input-err-text'>Что-то пошло не так...</span>

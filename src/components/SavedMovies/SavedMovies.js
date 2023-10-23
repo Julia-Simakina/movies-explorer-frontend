@@ -10,8 +10,8 @@ function SavedMovies({ toggleSidebar }) {
       <main className='saved-movies'>
         <SearchForm />
         <MoviesCardList savedMovies={true} />
-        <Footer />
       </main>
+      <Footer />
     </>
   );
 }

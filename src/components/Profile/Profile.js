@@ -9,7 +9,7 @@ function Profile({ toggleSidebar }) {
       <main className='profile'>
         <section className='profile__content'>
           <form className='form'>
-            <h2 className='profile__title'>Привет, пользователь! </h2>
+            <h1 className='profile__title'>Привет, пользователь! </h1>
             <fieldset className='form__container'>
               <div className='form__element'>
                 <label htmlFor='' className='form__label'>

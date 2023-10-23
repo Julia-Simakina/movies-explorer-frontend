@@ -1,7 +1,7 @@
 import './AuthForm.css';
 import { Link } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
-import logo from '../../images/logo.png';
+import logo from '../../images/logo.svg';
 
 function AuthForm({ children, title, logged }) {
   const { pathname } = useLocation();
@@ -19,7 +19,7 @@ function AuthForm({ children, title, logged }) {
         <Link to='/'>
           <img src={logo} alt='Логотип' className='auth__logo' />
         </Link>
-        <h2 className='auth__title'>{title}</h2>
+        <h1 className='auth__title'>{title}</h1>
         <form className={`auth__form ${logged ? 'login__form' : ''}`}>
           <fieldset className='auth__form-element'>{children}</fieldset>
         </form>
