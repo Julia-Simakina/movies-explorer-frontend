@@ -1,0 +1,132 @@
+.about-me {
+  padding: 110px 70px 95px;
+  box-sizing: border-box;
+}
+
+.about-me__student-info {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.about-me__text {
+  display: flex;
+  flex-direction: column;
+  max-width: 600px;
+}
+
+.about-me__name {
+  margin: 0;
+  font-size: 50px;
+  line-height: 58px;
+  font-weight: 400;
+  letter-spacing: -0.04em;
+}
+
+.about-me__prof {
+  margin: 0;
+  padding-top: 18px;
+  font-size: 18px;
+  line-height: 20px;
+  font-weight: 500;
+}
+
+.about-me__info {
+  margin: 0;
+  padding-top: 26px;
+  font-size: 14px;
+  line-height: 22px;
+  font-weight: 400;
+}
+
+.about-me__avatar {
+  width: 270px;
+  height: 327px;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+.about-me__githab {
+  margin-top: 99px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 17px;
+  text-decoration: none;
+  color: #000;
+}
+
+.about-me__githab:hover {
+  opacity: 0.7;
+}
+
+@media screen and (max-width: 1023px) {
+  .about-me {
+    padding: 90px 50px;
+  }
+
+  .about-me__name {
+    font-size: 40px;
+    line-height: 40px;
+  }
+  .about-me__avatar {
+    width: 255px;
+    height: 307px;
+  }
+
+  .about-me__prof {
+    padding-top: 16px;
+    font-size: 12px;
+    line-height: 18px;
+  }
+
+  .about-me__text {
+    max-width: 364px;
+  }
+
+  .about-me__info {
+    padding-top: 20px;
+    font-size: 12px;
+    line-height: 18px;
+  }
+
+  .about-me__githab {
+    margin-top: 105px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .about-me {
+    padding: 70px 14px 54px;
+  }
+
+  .about-me__avatar {
+    width: 292px;
+    height: 352px;
+    align-self: center;
+  }
+
+  .about-me__student-info {
+    flex-direction: column-reverse;
+  }
+
+  .about-me__name {
+    font-size: 30px;
+    line-height: 36px;
+    padding-top: 40px;
+  }
+
+  .about-me__prof {
+    padding-top: 20px;
+    font-size: 11px;
+    line-height: 16px;
+  }
+
+  .about-me__info {
+    font-size: 11px;
+    line-height: 16px;
+  }
+
+  .about-me__githab {
+    margin-top: 55px;
+  }
+}
