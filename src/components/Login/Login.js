@@ -1,37 +1,55 @@
 import './Login.css';
+import { useState } from 'react';
 import AuthForm from '../AuthForm/AuthForm';
 
-function Login() {
+function Login({ onLogin }) {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleInputEmail = e => {
+    setEmail(e.target.value);
+  };
+  const handleInputPassword = e => {
+    setPassword(e.target.value);
+  };
+
+  const handleSubmitLogin = e => {
+    e.preventDefault();
+    onLogin(email, password);
+  };
+
   return (
     <main className='login'>
-      <AuthForm title='Рады видеть!'>
+      <AuthForm title='Рады видеть!' onSubmit={handleSubmitLogin}>
         <div className='auth__form-container'>
-          <label htmlFor='name' className='auth__form-label'>
+          <label htmlFor='email' className='auth__form-label'>
             E-mail
           </label>
           <input
+            onChange={handleInputEmail}
             type='text'
-            id='name'
+            id='email'
             className='auth__form-input'
             placeholder='Введите E-mail'
             required
           />
-          <span></span>
+          <span className='form-error'></span>
         </div>
         <div className='auth__form-container'>
-          <label htmlFor='name' className='auth__form-label'>
+          <label htmlFor='password' className='auth__form-label'>
             Пароль
           </label>
           <input
-            type='text'
-            id='name'
+            onChange={handleInputPassword}
+            type='password'
+            id='password'
             className='auth__form-input '
             placeholder='Введите пароль'
-            minlength='5'
-            maxlength='30'
+            minLength='5'
+            maxLength='30'
             required
           />
-          <span></span>
+          <span className='form-error'></span>
         </div>
       </AuthForm>
     </main>

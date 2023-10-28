@@ -3,10 +3,10 @@ import MoviesCardList from '../Movies/MoviesCardList/MoviesCardList';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 
-function SavedMovies({ toggleSidebar }) {
+function SavedMovies({ isLoggedIn, toggleSidebar }) {
   return (
     <>
-      <Header name='logged' toggleSidebar={toggleSidebar} />
+      <Header isLoggedIn={isLoggedIn} toggleSidebar={toggleSidebar} />
       <main className='saved-movies'>
         <SearchForm />
         <MoviesCardList savedMovies={true} />

@@ -7,10 +7,10 @@ import AboutProject from './AboutProject/AboutProject';
 import Techs from './Techs/Techs';
 import AboutMe from './AboutMe/AboutMe';
 
-function Main({ toggleSidebar }) {
+function Main({ isLoggedIn, toggleSidebar }) {
   return (
     <>
-      <Header name='logged' toggleSidebar={toggleSidebar} />
+      <Header isLoggedIn={isLoggedIn} toggleSidebar={toggleSidebar} />
       <main className='main'>
         <Promo />
         <NavTab />
