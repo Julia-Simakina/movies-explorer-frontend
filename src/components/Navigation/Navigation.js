@@ -10,12 +10,18 @@ function Navigation() {
       <nav className='nav'>
         <ul className='nav__links'>
           <li>
-            <NavLink to='/movies' className='nav__link nav__link_type_active'>
+            <NavLink
+              to='/movies'
+              className={`nav__link ${pathname === '/movies' && 'nav__link_type_active'}`}
+            >
               Фильмы
             </NavLink>
           </li>
           <li>
-            <NavLink to='/saved-movies' className='nav__link'>
+            <NavLink
+              to='/saved-movies'
+              className={`nav__link ${pathname === '/saved-movies' && 'nav__link_type_active'}`}
+            >
               Сохранённые фильмы
             </NavLink>
           </li>

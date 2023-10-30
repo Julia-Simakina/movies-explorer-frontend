@@ -4,10 +4,13 @@ class MainApi {
   }
 
   _checkResponse(res) {
-    if (!res.ok) {
-      return Promise.reject(`Ошибка: ${res.status}`);
+    if (res.ok) {
+      return res.json();
     }
-    return res.json();
+
+    return res.json().then(err => {
+      return Promise.reject(`${err.message}`);
+    });
   }
 
   // User
@@ -58,6 +61,44 @@ class MainApi {
         'Content-Type': 'application/json',
         authorization: `Bearer ${token}`
       }
+    }).then(res => this._checkResponse(res));
+  }
+
+  getSavedMovies() {
+    return fetch(`${this._baseUrl}/movies`, {
+      method: 'GET',
+      headers: this._headers,
+      credentials: this._credentials
+    }).then(res => this._checkResponse(res));
+  }
+
+  addMovie(data, token) {
+    return fetch(`${this._baseUrl}/movies`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`
+      },
+      body: JSON.stringify({
+        country: data.country,
+        director: data.director,
+        duration: data.duration,
+        description: data.description,
+        year: data.year,
+        image: `https://api.nomoreparties.co${data.image.url}`,
+        trailerLink: data.trailerLink,
+        thumbnail: `https://api.nomoreparties.co${data.image.formats.thumbnail.url}`,
+        movieId: data.id,
+        nameRU: data.nameRU,
+        nameEN: data.nameEN
+      })
+    }).then(res => this._checkResponse(res));
+  }
+
+  deleteMovie(movieId) {
+    return fetch(`${this._baseUrl}/movies/${movieId}`, {
+      method: 'DELETE',
+      headers: this._headers
     }).then(res => this._checkResponse(res));
   }
 }

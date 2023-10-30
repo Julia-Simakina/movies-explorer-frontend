@@ -79,3 +79,7 @@ export const movies = [
     time: '1ч 17м'
   }
 ];
+
+const emailRegex = '^\\S+@\\S+\\.\\S+$';
+
+export { emailRegex };

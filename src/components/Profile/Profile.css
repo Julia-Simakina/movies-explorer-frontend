@@ -71,7 +71,7 @@
 }
 
 .form__input::placeholder {
-  color: #000;
+  color: #a0a0a0;
 }
 .profile__edit {
   display: flex;
@@ -123,8 +123,9 @@
   cursor: default;
 }
 
-.profile__save-btn:disabled :hover {
+.profile__save-btn:disabled:hover {
   opacity: 1;
+  cursor: default;
 }
 
 .profile__save-btn:disabled {
@@ -140,6 +141,10 @@
 
 .profile__success-edit {
   color: #0bb95d;
+}
+
+.profile__unsuccess-edit {
+  color: #ff004c;
 }
 
 @media screen and (max-width: 1023px) {

@@ -73,13 +73,14 @@
   font-size: 13px;
   line-height: 16px;
   font-weight: 400;
+  color: #000;
 }
 
 .auth__form-input::placeholder {
   color: #a0a0a0;
 }
 
-.auth__form-input_error_active::placeholder {
+.auth__form-input_error_active {
   color: #ff4062;
 }
 
@@ -91,12 +92,13 @@
   min-height: 20px;
   min-height: 12px;
   margin: 4px 0;
+  align-self: start;
 }
 
 .auth__submit-btn {
   width: 396px;
   height: 45px;
-  margin-top: 69px;
+  margin-top: 40px;
   color: #fff;
   font-size: 14px;
   background-color: #000;
@@ -105,14 +107,20 @@
   opacity: 1;
 }
 
+.auth__submit-btn:disabled {
+  background-color: #f8f8f8;
+  color: #c2c2c2;
+  cursor: default;
+}
+
+.auth__submit-btn:disabled:hover {
+  opacity: 1;
+  cursor: default;
+}
+
 .auth__submit-btn:hover {
   opacity: 0.8;
   cursor: pointer;
-}
-
-.auth__submit-btn_type_unactive {
-  background-color: #f8f8f8;
-  color: #c2c2c2;
 }
 
 .auth__to-signin {
@@ -144,6 +152,14 @@
 
 .auth__empty-separator {
   margin-top: 121px;
+}
+
+.auth__error {
+  color: #ff004c;
+  text-align: center;
+  display: block;
+  font-size: 14px;
+  margin: 20px auto;
 }
 
 @media screen and (max-width: 1023px) {

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 import logo from '../../images/logo.svg';
 
-function AuthForm({ children, title, logged, onSubmit }) {
+function AuthForm({ children, title, logged, onSubmit, errorText, disabledBtn }) {
   const { pathname } = useLocation();
 
   const isSignUp = pathname === '/signup';
@@ -20,11 +20,16 @@ function AuthForm({ children, title, logged, onSubmit }) {
           <img src={logo} alt='Логотип' className='auth__logo' />
         </Link>
         <h1 className='auth__title'>{title}</h1>
-        <form className={`auth__form ${logged ? 'login__form' : ''}`} onSubmit={onSubmit}>
+        <form
+          className={`auth__form ${logged ? 'login__form' : ''}`}
+          onSubmit={onSubmit}
+          noValidate
+        >
           <fieldset className='auth__form-element'>{children}</fieldset>
 
           <div className='auth__submit-container'>
-            <button type='submit' className='auth__submit-btn'>
+            <span className='auth__error'>{errorText}</span>
+            <button type='submit' className='auth__submit-btn' disabled={disabledBtn}>
               {buttonText}
             </button>
             <div className='auth__to-signin'>

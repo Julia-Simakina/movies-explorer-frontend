@@ -4,8 +4,9 @@ import { Link } from 'react-router-dom';
 import useFormValidation from '../../hooks/useFormValidation';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import './Profile.css';
+import { emailRegex } from '../../utils/constants';
 
-function Profile({ toggleSidebar, onSignOut, onUpdateUser, isLoggedIn }) {
+function Profile({ toggleSidebar, onSignOut, onUpdateUser, success }) {
   const {
     formValues,
     formErrors,
@@ -18,7 +19,6 @@ function Profile({ toggleSidebar, onSignOut, onUpdateUser, isLoggedIn }) {
 
   const currentUser = useContext(CurrentUserContext);
   const [isEdit, setIsEdit] = useState(false);
-  const [isSuccess, setIsSuccess] = useState(false);
 
   useEffect(() => {
     resetForm();
@@ -26,20 +26,19 @@ function Profile({ toggleSidebar, onSignOut, onUpdateUser, isLoggedIn }) {
       name: currentUser.name,
       email: currentUser.email
     });
-    // setNetworkErrors("");
   }, [resetForm, setFormValues, currentUser]);
 
   useEffect(() => {
     if (currentUser.name === formValues.name && currentUser.email === formValues.email) {
       setFormIsValid(false);
     }
-  }, [formValues]);
+  }, [formValues, currentUser.email, currentUser.name, setFormIsValid]);
 
   const handleSubmit = evt => {
     evt.preventDefault();
     setFormIsValid(false);
     setIsEdit(false);
-    setIsSuccess(true);
+    // setIsSuccess(true);
     onUpdateUser({
       name: formValues.name,
       email: formValues.email
@@ -53,10 +52,10 @@ function Profile({ toggleSidebar, onSignOut, onUpdateUser, isLoggedIn }) {
 
   return (
     <>
-      <Header isLoggedIn={isLoggedIn} toggleSidebar={toggleSidebar} />
+      <Header toggleSidebar={toggleSidebar} />
       <main className='profile'>
         <section className='profile__content'>
-          <form className='form' onSubmit={handleSubmit}>
+          <form className='form' onSubmit={handleSubmit} noValidate>
             <div className='profile__form-container'>
               <h1 className='profile__title'>{`Привет, ${currentUser.name}`}</h1>
               <fieldset className='form__container'>
@@ -74,10 +73,12 @@ function Profile({ toggleSidebar, onSignOut, onUpdateUser, isLoggedIn }) {
                     onChange={handleChange}
                     value={formValues.name || ''}
                     disabled={!isEdit}
+                    required
+
                     // value={isEdit ? formValues['name'] : currentUser.name}
                   />
                 </div>
-                <span>{formErrors.name}</span>
+                <span className='form-error'>{formErrors.name}</span>
                 <div className='form__element'>
                   <label htmlFor='' className='form__label'>
                     E-mail
@@ -90,9 +91,11 @@ function Profile({ toggleSidebar, onSignOut, onUpdateUser, isLoggedIn }) {
                     onChange={handleChange}
                     value={formValues.email || ''}
                     disabled={!isEdit}
+                    pattern={emailRegex}
+                    required
                   />
                 </div>
-                <span>{formErrors.name}</span>
+                <span className='form-error'>{formErrors.email}</span>
               </fieldset>
             </div>
 
@@ -107,8 +110,14 @@ function Profile({ toggleSidebar, onSignOut, onUpdateUser, isLoggedIn }) {
                 </button>
               ) : (
                 <>
-                  <span className='profile__success-edit'>
-                    {isSuccess ? 'Данные профиля изменены.' : ''}
+                  <span
+                    className={
+                      success === 'Данные профиля изменены'
+                        ? 'profile__success-edit'
+                        : 'profile__unsuccess-edit'
+                    }
+                  >
+                    {success}
                   </span>
                   <button className='profile__edit-btn' onClick={handleFormEdit}>
                     Редактировать

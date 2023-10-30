@@ -3,8 +3,11 @@ import logo from '../../images/logo.svg';
 import Navigation from '../Navigation/Navigation';
 import { useLocation } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import { useContext } from 'react';
+import { LoginContext } from '../../contexts/LoginContext';
 
-function Header({ isLoggedIn, toggleSidebar }) {
+function Header({ toggleSidebar }) {
+  const { isLoggedIn } = useContext(LoginContext);
   const { pathname } = useLocation();
 
   return isLoggedIn ? (
