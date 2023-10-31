@@ -8,7 +8,7 @@ import { LoginContext } from '../../contexts/LoginContext';
 
 function Movies({ toggleSidebar }) {
   const { isLoggedIn } = useContext(LoginContext);
-  const [allMovies, setAllMovies] = useState([]);
+  const [allMovies, setAllMovies] = useState(JSON.parse(localStorage.getItem('allmovies')) || []);
 
   useEffect(() => {
     if (isLoggedIn) {
@@ -23,13 +23,17 @@ function Movies({ toggleSidebar }) {
     }
   }, [isLoggedIn]);
 
-  const onMoviesSearch = async ({ search }) => {};
+  useEffect(() => {
+    if (allMovies) {
+      localStorage.setItem('allmovies', JSON.stringify(allMovies));
+    }
+  }, [allMovies]);
 
   return (
     <>
       <Header toggleSidebar={toggleSidebar} />
       <main>
-        <SearchForm onMoviesSearch={onMoviesSearch} />
+        <SearchForm />
         <MoviesCardList allMovies={allMovies} />
       </main>
       <Footer />

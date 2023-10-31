@@ -1,11 +1,28 @@
 import React from 'react';
 import './MoviesCard.css';
+import { useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
-function MoviesCard({ card }) {
+function convertTime(duration) {
+  const minutes = duration % 60;
+  const hours = Math.floor(duration / 60);
+  return hours === 0 ? `${minutes}м` : minutes === 0 ? `${hours}ч` : `${hours}ч ${minutes}м`;
+}
+
+function MoviesCard({ data }) {
+  const { pathname } = useLocation();
   return (
     <li className='card-movie'>
       <div className='card-movie__container'>
-        <img src={card.image} alt={card.title} className='card-movie__img' />
+        <Link to={data.trailerLink} target='_blank'>
+          <img
+            src={
+              pathname === '/movies' ? `https://api.nomoreparties.co${data.image.url}` : data.image
+            }
+            alt={data.name}
+            className='card-movie__img'
+          />
+        </Link>
         {/* {savedMovies && (
           <button className='card-movie__btn  card-movie__btn_type_delete' type='button' />
         )}
@@ -20,8 +37,8 @@ function MoviesCard({ card }) {
         ){/* } */}
       </div>
       <div className='card-movie__data'>
-        <h2 className='card-movie__name'>{card.title}</h2>
-        <p className='card-movie__duration'>{card.time}</p>
+        <h2 className='card-movie__name'>{data.nameRU}</h2>
+        <p className='card-movie__duration'>{convertTime(data.duration)}</p>
       </div>
     </li>
   );

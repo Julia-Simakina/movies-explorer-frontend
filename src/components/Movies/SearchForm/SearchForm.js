@@ -2,7 +2,7 @@ import './SearchForm.css';
 import SearchIcon from '../../../images/search-icon.svg';
 import useFormValidation from '../../../hooks/useFormValidation';
 
-function SearchForm({ searchMovies, onMoviesSearch }) {
+function SearchForm() {
   const {
     formValues,
     formErrors,
@@ -20,14 +20,15 @@ function SearchForm({ searchMovies, onMoviesSearch }) {
   //   }
   // }
 
-  const handleSearch = e => {
-    e.preventDefault();
-    // if (formState.search) {
-    //     onMoviesSearch(formState)
-    // } else {
-    //     setError(true)
-    // }
-  };
+  // const handleSearch = e => {
+  // e.preventDefault();
+  // if (formState.search) {
+  //     onMoviesSearch(formState)
+  // } else {
+  //     setError(true)
+  // }
+  // };
+
   return (
     <section className='search-form-section'>
       <form className='search-form'>
@@ -36,7 +37,7 @@ function SearchForm({ searchMovies, onMoviesSearch }) {
             <img src={SearchIcon} alt='Иконка поиска' className='search-form__icon' />
             <input className='search-form__input' placeholder='Фильм' name='search' />
           </div>
-          <button type='submit' className='search-form__submit-btn' onClick={handleSearch}>
+          <button type='submit' className='search-form__submit-btn'>
             Найти
           </button>
           <div className='search-form__decor-line'></div>
