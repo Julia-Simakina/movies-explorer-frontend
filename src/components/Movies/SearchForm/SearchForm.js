@@ -1,8 +1,10 @@
 import './SearchForm.css';
 import SearchIcon from '../../../images/search-icon.svg';
 import useFormValidation from '../../../hooks/useFormValidation';
+import { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 
-function SearchForm() {
+function SearchForm({ value, onChange }) {
   const {
     formValues,
     formErrors,
@@ -13,21 +15,9 @@ function SearchForm() {
     resetForm
   } = useFormValidation();
 
-  // function onSubmit(e) {
-  //   e.preventDefault();
-  //   if (e.target.value) {
-  //     searchMovies(e.target.value);
-  //   }
-  // }
-
-  // const handleSearch = e => {
-  // e.preventDefault();
-  // if (formState.search) {
-  //     onMoviesSearch(formState)
-  // } else {
-  //     setError(true)
-  // }
-  // };
+  const handleSearch = e => {
+    e.preventDefault();
+  };
 
   return (
     <section className='search-form-section'>
@@ -35,9 +25,15 @@ function SearchForm() {
         <div className='search-form__container'>
           <div className='search-form__input-container'>
             <img src={SearchIcon} alt='Иконка поиска' className='search-form__icon' />
-            <input className='search-form__input' placeholder='Фильм' name='search' />
+            <input
+              className='search-form__input'
+              placeholder='Фильм'
+              name='search'
+              onChange={onChange}
+              value={value}
+            />
           </div>
-          <button type='submit' className='search-form__submit-btn'>
+          <button type='submit' className='search-form__submit-btn' onClick={handleSearch}>
             Найти
           </button>
           <div className='search-form__decor-line'></div>

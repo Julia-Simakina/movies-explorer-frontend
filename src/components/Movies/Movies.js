@@ -9,32 +9,47 @@ import { LoginContext } from '../../contexts/LoginContext';
 function Movies({ toggleSidebar }) {
   const { isLoggedIn } = useContext(LoginContext);
   const [allMovies, setAllMovies] = useState(JSON.parse(localStorage.getItem('allmovies')) || []);
+  const [filtredMovies, setFiltredMovies] = useState(allMovies);
+  const [searchInputString, setSearchInputString] = useState(
+    localStorage.getItem('searchInputString') || ''
+  );
+
+  function search(e) {
+    const value = e.target.value;
+    setSearchInputString(value);
+    localStorage.setItem('searchInputString', value);
+  }
 
   useEffect(() => {
     if (isLoggedIn) {
       moviesApi
         .getMovies()
         .then(data => {
-          setAllMovies(data);
+          if (allMovies.length === 0) {
+            setAllMovies(data);
+          }
+          localStorage.setItem('allmovies', JSON.stringify(allMovies));
         })
         .catch(err => {
           console.log(`Ошибка: ${err}`);
         });
     }
-  }, [isLoggedIn]);
+  }, [isLoggedIn, allMovies]);
 
   useEffect(() => {
-    if (allMovies) {
-      localStorage.setItem('allmovies', JSON.stringify(allMovies));
-    }
-  }, [allMovies]);
+    const filtredMovies = allMovies.filter(movie =>
+      movie.nameRU.toLowerCase().includes(searchInputString.toLowerCase())
+    );
+
+    setFiltredMovies(filtredMovies);
+  }, [searchInputString]);
 
   return (
     <>
       <Header toggleSidebar={toggleSidebar} />
       <main>
-        <SearchForm />
-        <MoviesCardList allMovies={allMovies} />
+        <SearchForm value={searchInputString} onChange={search} />
+        <MoviesCardList movies={filtredMovies} />
       </main>
       <Footer />
     </>

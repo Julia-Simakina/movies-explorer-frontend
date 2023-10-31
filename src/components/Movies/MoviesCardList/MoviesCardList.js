@@ -3,7 +3,7 @@ import './MoviesCardList.css';
 import MoviesCard from '../MoviesCard/MoviesCard';
 //import { movies } from '../../../utils/constants';
 
-function MoviesCardList({ allMovies }) {
+function MoviesCardList({ movies }) {
   //const [cards, setCards] = useState(movies);
   // useEffect(() => {
   //   if (savedMovies) {
@@ -14,7 +14,7 @@ function MoviesCardList({ allMovies }) {
   return (
     <section className='movies-list'>
       <ul className='movies-list__container'>
-        {allMovies.map(data => (
+        {movies.map(data => (
           <MoviesCard
             data={data}
             key={data.id}
