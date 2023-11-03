@@ -27,6 +27,13 @@
   font-weight: 500;
 }
 
+.movies-list__error-message {
+  color: #a0a0a0;
+  text-align: center;
+  width: 600px;
+  margin: 0 auto;
+}
+
 .movies-list__button:hover {
   cursor: pointer;
   opacity: 0.7;
@@ -65,6 +72,10 @@
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 20px 30px;
     max-width: 300px;
+  }
+
+  .movies-list__error-message {
+    width: 305px;
   }
 
   .movies-list__button {

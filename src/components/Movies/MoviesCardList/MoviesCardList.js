@@ -1,9 +1,12 @@
 import { React, useState, useEffect } from 'react';
+
+import { useLocation } from 'react-router-dom';
 import './MoviesCardList.css';
 import MoviesCard from '../MoviesCard/MoviesCard';
 //import { movies } from '../../../utils/constants';
 
-function MoviesCardList({ movies }) {
+function MoviesCardList({ movies, serverError }) {
+  const pathname = useLocation();
   //const [cards, setCards] = useState(movies);
   // useEffect(() => {
   //   if (savedMovies) {
@@ -22,7 +25,12 @@ function MoviesCardList({ movies }) {
           />
         ))}
       </ul>
-      {/* {!savedMovies && ( */}
+      {serverError && (
+        <div className='movies-list__error-message'>
+          Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен.
+          Подождите немного и попробуйте ещё раз.
+        </div>
+      )}
       <button className='movies-list__button movies-list__button_type_unactive' type='button'>
         Ещё
       </button>

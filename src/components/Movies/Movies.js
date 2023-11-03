@@ -8,11 +8,19 @@ import { LoginContext } from '../../contexts/LoginContext';
 
 function Movies({ toggleSidebar }) {
   const { isLoggedIn } = useContext(LoginContext);
-  const [allMovies, setAllMovies] = useState(JSON.parse(localStorage.getItem('allmovies')) || []);
+  const [allMovies, setAllMovies] = useState(JSON.parse(localStorage.getItem('allMovies')) || []);
   const [filtredMovies, setFiltredMovies] = useState(allMovies);
   const [searchInputString, setSearchInputString] = useState(
     localStorage.getItem('searchInputString') || ''
   );
+  const [isShort, setIsShort] = useState(JSON.parse(localStorage.getItem('isShort') || false));
+  const [isValid, setIsValid] = useState(true);
+  const [serverError, setServerError] = useState(false);
+
+  const handleSearch = e => {
+    e.preventDefault();
+    searchMovies(search);
+  };
 
   function search(e) {
     const value = e.target.value;
@@ -20,36 +28,64 @@ function Movies({ toggleSidebar }) {
     localStorage.setItem('searchInputString', value);
   }
 
-  useEffect(() => {
-    if (isLoggedIn) {
+  function searchMovies() {
+    if (!searchInputString) {
+      setIsValid(false);
+    }
+    if (allMovies.length === 0 && searchInputString) {
       moviesApi
         .getMovies()
-        .then(data => {
-          if (allMovies.length === 0) {
-            setAllMovies(data);
-          }
-          localStorage.setItem('allmovies', JSON.stringify(allMovies));
+        .then(res => {
+          setIsValid(true);
+          setAllMovies(res);
+          setServerError(false);
+          localStorage.setItem('allMovies', JSON.stringify(res));
         })
         .catch(err => {
+          setServerError(true);
           console.log(`Ошибка: ${err}`);
         });
+    } else if (searchInputString) {
+      handleSubmitSearch();
+      setIsValid(true);
     }
-  }, [isLoggedIn, allMovies]);
+  }
 
-  useEffect(() => {
+  function handleSubmitSearch() {
     const filtredMovies = allMovies.filter(movie =>
-      movie.nameRU.toLowerCase().includes(searchInputString.toLowerCase())
+      isShort
+        ? movie.nameRU.toLowerCase().includes(searchInputString.toLowerCase()) &&
+          movie.duration <= 40
+        : movie.nameRU.toLowerCase().includes(searchInputString.toLowerCase())
     );
 
     setFiltredMovies(filtredMovies);
-  }, [searchInputString]);
+  }
+
+  useEffect(() => {
+    handleSubmitSearch();
+    setIsValid(true);
+  }, [allMovies]);
+
+  function checkShort(e) {
+    const value = e.target.checked;
+    setIsShort(value);
+    localStorage.setItem('isShort', value);
+  }
 
   return (
     <>
       <Header toggleSidebar={toggleSidebar} />
       <main>
-        <SearchForm value={searchInputString} onChange={search} />
-        <MoviesCardList movies={filtredMovies} />
+        <SearchForm
+          value={searchInputString}
+          onChange={search}
+          onSubmit={handleSearch}
+          checked={isShort}
+          handleChange={checkShort}
+          isValid={isValid}
+        />
+        <MoviesCardList movies={filtredMovies} serverError={serverError} />
       </main>
       <Footer />
     </>

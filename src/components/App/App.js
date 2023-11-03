@@ -28,7 +28,6 @@ function App() {
   const [errorText, setErrortext] = useState('');
   const [success, setSuccess] = useState('');
   const [appIsReady, setAppIsReady] = useState(false);
-  const [allMovie, setAllMovie] = useState([]);
 
   //Регистрация
   function handleRegisterSubmit(data) {
@@ -67,18 +66,18 @@ function App() {
     navigate('/');
   }
 
-  useEffect(() => {
-    if (isLoggedIn) {
-      moviesApi
-        .getMovies()
-        .then(data => {
-          setAllMovie(data);
-        })
-        .catch(err => {
-          console.log(`Ошибка: ${err}`);
-        });
-    }
-  }, [isLoggedIn]);
+  // useEffect(() => {
+  //   if (isLoggedIn) {
+  //     moviesApi
+  //       .getMovies()
+  //       .then(data => {
+  //         setAllMovie(data);
+  //       })
+  //       .catch(err => {
+  //         console.log(`Ошибка: ${err}`);
+  //       });
+  //   }
+  // }, [isLoggedIn]);
 
   useEffect(() => {
     if (isLoggedIn) {
