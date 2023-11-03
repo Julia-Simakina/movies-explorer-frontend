@@ -1,7 +1,8 @@
-import React from 'react';
+import { React, useState } from 'react';
 import './MoviesCard.css';
 import { useLocation } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import mainApi from '../../../utils/MainApi';
 
 function convertTime(duration) {
   const minutes = duration % 60;
@@ -10,7 +11,17 @@ function convertTime(duration) {
 }
 
 function MoviesCard({ data }) {
+  const [savedMovies, setSavedMovies] = useState([]);
   const { pathname } = useLocation();
+  function handleLikeClick() {
+    mainApi
+      .addMovie(data, localStorage.jwt)
+      .then(res => {
+        setSavedMovies([res, ...savedMovies]);
+      })
+      .catch(err => console.error(`Ошибка при установке лайка ${err}`));
+  }
+
   return (
     <li className='card-movie'>
       <div className='card-movie__container'>
@@ -31,7 +42,11 @@ function MoviesCard({ data }) {
         )} */}
         {/* {!savedMovies &&  */}
         !card.saved && (
-        <button className='card-movie__btn card-movie__btn_type_save' type='button'>
+        <button
+          className='card-movie__btn card-movie__btn_type_save'
+          type='button'
+          onClick={handleLikeClick}
+        >
           Сохранить
         </button>
         ){/* } */}

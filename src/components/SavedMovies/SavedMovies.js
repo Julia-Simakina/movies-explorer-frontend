@@ -4,12 +4,13 @@ import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 
 function SavedMovies({ toggleSidebar }) {
+  const movies = [];
   return (
     <>
       <Header toggleSidebar={toggleSidebar} />
       <main className='saved-movies'>
         <SearchForm />
-        <MoviesCardList />
+        <MoviesCardList movies={movies} />
       </main>
       <Footer />
     </>

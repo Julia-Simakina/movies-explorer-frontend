@@ -17,13 +17,21 @@ function MoviesCardList({ movies, serverError }) {
   return (
     <section className='movies-list'>
       <ul className='movies-list__container'>
-        {movies.map(data => (
-          <MoviesCard
-            data={data}
-            key={data.id}
-            // savedMovies={savedMovies}
-          />
-        ))}
+        {pathname === '/movie'
+          ? movies.map(data => (
+              <MoviesCard
+                data={data}
+                key={data.id}
+                // savedMovies={savedMovies}
+              />
+            ))
+          : movies.map(data => (
+              <MoviesCard
+                data={data}
+                key={data.id ? data.id : data._id}
+                // savedMovies={savedMovies}
+              />
+            ))}
       </ul>
       {serverError && (
         <div className='movies-list__error-message'>
