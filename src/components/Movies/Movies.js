@@ -46,8 +46,8 @@ function Movies({ toggleSidebar }) {
           console.log(`Ошибка: ${err}`);
         });
     } else if (searchInputString) {
-      handleSubmitSearch();
       setIsValid(true);
+      handleSubmitSearch();
     }
   }
 
