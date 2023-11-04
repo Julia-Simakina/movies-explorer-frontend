@@ -64,11 +64,13 @@ class MainApi {
     }).then(res => this._checkResponse(res));
   }
 
-  getSavedMovies() {
+  getSavedMovies(token) {
     return fetch(`${this._baseUrl}/movies`, {
       method: 'GET',
-      headers: this._headers,
-      credentials: this._credentials
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`
+      }
     }).then(res => this._checkResponse(res));
   }
 
@@ -95,10 +97,13 @@ class MainApi {
     }).then(res => this._checkResponse(res));
   }
 
-  deleteMovie(movieId) {
+  deleteMovie(movieId, token) {
     return fetch(`${this._baseUrl}/movies/${movieId}`, {
       method: 'DELETE',
-      headers: this._headers
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`
+      }
     }).then(res => this._checkResponse(res));
   }
 }

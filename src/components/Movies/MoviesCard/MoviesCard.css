@@ -49,6 +49,7 @@
 .card-movie__btn_type_saved {
   width: 21px;
   height: 21px;
+  background: none;
   background-image: url(../../../images/saved_movie.svg);
 }
 

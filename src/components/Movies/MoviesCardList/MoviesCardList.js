@@ -5,8 +5,9 @@ import './MoviesCardList.css';
 import MoviesCard from '../MoviesCard/MoviesCard';
 //import { movies } from '../../../utils/constants';
 
-function MoviesCardList({ movies, serverError }) {
-  const pathname = useLocation();
+function MoviesCardList({ movies, serverError, savedMovies, setSavedMovies }) {
+  const { pathname } = useLocation();
+
   //const [cards, setCards] = useState(movies);
   // useEffect(() => {
   //   if (savedMovies) {
@@ -17,12 +18,13 @@ function MoviesCardList({ movies, serverError }) {
   return (
     <section className='movies-list'>
       <ul className='movies-list__container'>
-        {pathname === '/movie'
+        {pathname === '/movies'
           ? movies.map(data => (
               <MoviesCard
                 data={data}
                 key={data.id}
-                // savedMovies={savedMovies}
+                savedMovies={savedMovies}
+                setSavedMovies={setSavedMovies}
               />
             ))
           : movies.map(data => (

@@ -1,8 +1,9 @@
-import { React, useState } from 'react';
+import { React, useEffect } from 'react';
 import './MoviesCard.css';
 import { useLocation } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import mainApi from '../../../utils/MainApi';
+import { useState } from 'react';
 
 function convertTime(duration) {
   const minutes = duration % 60;
@@ -10,16 +11,45 @@ function convertTime(duration) {
   return hours === 0 ? `${minutes}м` : minutes === 0 ? `${hours}ч` : `${hours}ч ${minutes}м`;
 }
 
-function MoviesCard({ data }) {
-  const [savedMovies, setSavedMovies] = useState([]);
+function MoviesCard({ data, savedMovies, setSavedMovies }) {
   const { pathname } = useLocation();
+
+  const [isLike, setIsLike] = useState(false);
+
+  useEffect(() => {
+    if (pathname === '/movies' && savedMovies) {
+      setIsLike(savedMovies.some(item => data.id === item.movieId));
+    } else if (pathname === '/saved-movies') {
+      setIsLike(true);
+    }
+  }, [savedMovies, data.id, pathname]);
+
   function handleLikeClick() {
     mainApi
       .addMovie(data, localStorage.jwt)
-      .then(res => {
-        setSavedMovies([res, ...savedMovies]);
+      .then(() => {
+        setIsLike(true);
       })
       .catch(err => console.error(`Ошибка при установке лайка ${err}`));
+  }
+  if (isLike) console.log('isLike==true', isLike);
+
+  function onClick() {
+    onDelete(savedMovies.some(item => data.id === item.movieId));
+    setIsLike(false);
+  }
+
+  function onDelete(deleteMovieId) {
+    mainApi
+      .deleteMovie(deleteMovieId, localStorage.jwt)
+      .then(() => {
+        setSavedMovies(
+          savedMovies.filter(movie => {
+            return movie._id !== deleteMovieId;
+          })
+        );
+      })
+      .catch(err => console.error(`Ошибка при удалении фильма ${err}`));
   }
 
   return (
@@ -34,22 +64,32 @@ function MoviesCard({ data }) {
             className='card-movie__img'
           />
         </Link>
-        {/* {savedMovies && (
-          <button className='card-movie__btn  card-movie__btn_type_delete' type='button' />
+
+        {pathname === '/saved-movies' && (
+          <button
+            className='card-movie__btn  card-movie__btn_type_delete'
+            type='button'
+            onClick={() => onDelete(data._id)}
+          />
         )}
-        {!savedMovies && card.saved && (
-          <div className='card-movie__btn card-movie__btn_type_saved'></div>
-        )} */}
-        {/* {!savedMovies &&  */}
-        !card.saved && (
-        <button
-          className='card-movie__btn card-movie__btn_type_save'
-          type='button'
-          onClick={handleLikeClick}
-        >
-          Сохранить
-        </button>
-        ){/* } */}
+
+        {isLike && pathname === '/movies' && (
+          <button
+            className='card-movie__btn card-movie__btn_type_saved'
+            onClick={onClick}
+            type='button'
+          ></button>
+        )}
+
+        {!isLike && pathname === '/movies' && (
+          <button
+            className='card-movie__btn card-movie__btn_type_save'
+            type='button'
+            onClick={handleLikeClick}
+          >
+            Сохранить
+          </button>
+        )}
       </div>
       <div className='card-movie__data'>
         <h2 className='card-movie__name'>{data.nameRU}</h2>

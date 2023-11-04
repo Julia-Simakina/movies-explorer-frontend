@@ -4,6 +4,7 @@ import MoviesCardList from './MoviesCardList/MoviesCardList';
 import Footer from '../Footer/Footer';
 import { useEffect, useState, useContext } from 'react';
 import moviesApi from '../../utils/MoviesApi';
+import mainApi from '../../utils/MainApi';
 import { LoginContext } from '../../contexts/LoginContext';
 
 function Movies({ toggleSidebar }) {
@@ -16,6 +17,15 @@ function Movies({ toggleSidebar }) {
   const [isShort, setIsShort] = useState(JSON.parse(localStorage.getItem('isShort') || false));
   const [isValid, setIsValid] = useState(true);
   const [serverError, setServerError] = useState(false);
+
+  const [savedMovies, setSavedMovies] = useState([]);
+  const token = localStorage.getItem('jwt');
+
+  useEffect(() => {
+    mainApi.getSavedMovies(token).then(res => {
+      setSavedMovies(res);
+    });
+  }, []);
 
   const handleSearch = e => {
     e.preventDefault();
@@ -85,7 +95,12 @@ function Movies({ toggleSidebar }) {
           handleChange={checkShort}
           isValid={isValid}
         />
-        <MoviesCardList movies={filtredMovies} serverError={serverError} />
+        <MoviesCardList
+          savedMovies={savedMovies}
+          setSavedMovies={setSavedMovies}
+          movies={filtredMovies}
+          serverError={serverError}
+        />
       </main>
       <Footer />
     </>
