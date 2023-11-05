@@ -7,19 +7,50 @@ import MoviesCard from '../MoviesCard/MoviesCard';
 
 function MoviesCardList({ movies, serverError, savedMovies, setSavedMovies }) {
   const { pathname } = useLocation();
+  const [count, setCount] = useState('');
+  const fact = movies.slice(0, count);
 
-  //const [cards, setCards] = useState(movies);
-  // useEffect(() => {
-  //   if (savedMovies) {
-  //     setCards(cards => cards.filter(card => card.saved));
-  //   }
-  // }, [savedMovies]);
+  function printCards() {
+    const counter = { init: 12, step: 3 };
+    if (window.innerWidth < 1280) {
+      counter.init = 8;
+      counter.step = 2;
+    }
+    if (window.innerWidth < 768) {
+      counter.init = 5;
+      counter.step = 2;
+    }
+    return counter;
+  }
+
+  useEffect(() => {
+    if (pathname === '/movies') {
+      setCount(printCards().init);
+      function printCardsForResize() {
+        if (window.innerWidth >= 1280) {
+          setCount(printCards().init);
+        }
+        if (window.innerWidth < 1280) {
+          setCount(printCards().init);
+        }
+        if (window.innerWidth < 768) {
+          setCount(printCards().init);
+        }
+      }
+      window.addEventListener('resize', printCardsForResize);
+      return () => window.removeEventListener('resize', printCardsForResize);
+    }
+  }, [pathname, movies]);
+
+  function clickMore() {
+    setCount(count + printCards().step);
+  }
 
   return (
     <section className='movies-list'>
       <ul className='movies-list__container'>
-        {pathname === '/movies'
-          ? movies.map(data => (
+        {pathname === '/movies' && fact.length !== 0
+          ? fact.map(data => (
               <MoviesCard
                 data={data}
                 key={data.id}
@@ -43,7 +74,11 @@ function MoviesCardList({ movies, serverError, savedMovies, setSavedMovies }) {
           Подождите немного и попробуйте ещё раз.
         </div>
       )}
-      <button className='movies-list__button movies-list__button_type_unactive' type='button'>
+      <button
+        className='movies-list__button movies-list__button_type_unactive'
+        type='button'
+        onClick={clickMore}
+      >
         Ещё
       </button>
       {/* )} */}
