@@ -30,6 +30,8 @@ function MoviesCardList({ movies, serverError, savedMovies, setSavedMovies }) {
           : movies.map(data => (
               <MoviesCard
                 data={data}
+                savedMovies={savedMovies}
+                setSavedMovies={setSavedMovies}
                 key={data.id ? data.id : data._id}
                 // savedMovies={savedMovies}
               />

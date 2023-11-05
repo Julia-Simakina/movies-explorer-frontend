@@ -16,38 +16,43 @@ function MoviesCard({ data, savedMovies, setSavedMovies }) {
 
   const [isLike, setIsLike] = useState(false);
 
+  const token = localStorage.getItem('jwt');
+
   useEffect(() => {
     if (pathname === '/movies' && savedMovies) {
       setIsLike(savedMovies.some(item => data.id === item.movieId));
-    } else if (pathname === '/saved-movies') {
-      setIsLike(true);
-    }
-  }, [savedMovies, data.id, pathname]);
+    } else if (pathname === '/saved-movies') setIsLike(true);
+  }, [savedMovies]);
+
+  function fetchSavedMovies() {
+    mainApi
+      .getSavedMovies(token)
+      .then(res => setSavedMovies(res))
+      .catch(err => console.error(`Ошибка при загрузке сохраненных фильмов ${err}`));
+  }
 
   function handleLikeClick() {
     mainApi
       .addMovie(data, localStorage.jwt)
       .then(() => {
         setIsLike(true);
+        fetchSavedMovies();
+        // setSavedMovies([...savedMovies, data]);
       })
       .catch(err => console.error(`Ошибка при установке лайка ${err}`));
   }
-  if (isLike) console.log('isLike==true', isLike);
 
   function onClick() {
-    onDelete(savedMovies.some(item => data.id === item.movieId));
-    setIsLike(false);
+    const movieId = savedMovies.find(item => item.movieId === data.id)._id;
+    onDelete(movieId);
   }
 
   function onDelete(deleteMovieId) {
     mainApi
       .deleteMovie(deleteMovieId, localStorage.jwt)
       .then(() => {
-        setSavedMovies(
-          savedMovies.filter(movie => {
-            return movie._id !== deleteMovieId;
-          })
-        );
+        setIsLike(false);
+        fetchSavedMovies();
       })
       .catch(err => console.error(`Ошибка при удалении фильма ${err}`));
   }

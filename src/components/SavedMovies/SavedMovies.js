@@ -21,7 +21,7 @@ function SavedMovies({ toggleSidebar }) {
       <Header toggleSidebar={toggleSidebar} />
       <main className='saved-movies'>
         <SearchForm />
-        <MoviesCardList movies={savedMovies} />
+        <MoviesCardList movies={savedMovies} setSavedMovies={setSavedMovies} />
       </main>
       <Footer />
     </>
