@@ -44,8 +44,17 @@
   background-color: #fff;
 }
 
+/* .movies-list__button_type_unactive:disabled {
+  visibility: hidden;
+}
+
+.movies-list__button:disabled {
+  visibility: hidden;
+} */
+
 .movies-list__button_type_unactive:hover {
   cursor: default;
+  opacity: 1;
 }
 
 @media screen and (max-width: 1279px) {

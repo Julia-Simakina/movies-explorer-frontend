@@ -8,9 +8,9 @@ import MoviesCard from '../MoviesCard/MoviesCard';
 function MoviesCardList({ movies, serverError, savedMovies, setSavedMovies }) {
   const { pathname } = useLocation();
   const [count, setCount] = useState('');
-  const fact = movies.slice(0, count);
+  const visibleCards = movies.slice(0, count);
 
-  function printCards() {
+  function addCards() {
     const counter = { init: 12, step: 3 };
     if (window.innerWidth < 1280) {
       counter.init = 8;
@@ -25,16 +25,16 @@ function MoviesCardList({ movies, serverError, savedMovies, setSavedMovies }) {
 
   useEffect(() => {
     if (pathname === '/movies') {
-      setCount(printCards().init);
+      setCount(addCards().init);
       function printCardsForResize() {
         if (window.innerWidth >= 1280) {
-          setCount(printCards().init);
+          setCount(addCards().init);
         }
         if (window.innerWidth < 1280) {
-          setCount(printCards().init);
+          setCount(addCards().init);
         }
         if (window.innerWidth < 768) {
-          setCount(printCards().init);
+          setCount(addCards().init);
         }
       }
       window.addEventListener('resize', printCardsForResize);
@@ -43,14 +43,14 @@ function MoviesCardList({ movies, serverError, savedMovies, setSavedMovies }) {
   }, [pathname, movies]);
 
   function clickMore() {
-    setCount(count + printCards().step);
+    setCount(count + addCards().step);
   }
 
   return (
     <section className='movies-list'>
       <ul className='movies-list__container'>
-        {pathname === '/movies' && fact.length !== 0
-          ? fact.map(data => (
+        {pathname === '/movies' && visibleCards.length !== 0
+          ? visibleCards.map(data => (
               <MoviesCard
                 data={data}
                 key={data.id}
@@ -64,7 +64,6 @@ function MoviesCardList({ movies, serverError, savedMovies, setSavedMovies }) {
                 savedMovies={savedMovies}
                 setSavedMovies={setSavedMovies}
                 key={data.id ? data.id : data._id}
-                // savedMovies={savedMovies}
               />
             ))}
       </ul>
@@ -74,14 +73,29 @@ function MoviesCardList({ movies, serverError, savedMovies, setSavedMovies }) {
           Подождите немного и попробуйте ещё раз.
         </div>
       )}
-      <button
-        className='movies-list__button movies-list__button_type_unactive'
-        type='button'
-        onClick={clickMore}
-      >
-        Ещё
-      </button>
-      {/* )} */}
+
+      {movies.length === 0 && pathname === '/movies' && !localStorage.allMovies && (
+        <div className='movies-list__error-message'>
+          Чтобы увидеть список фильмов, выполните поиск.
+        </div>
+      )}
+      {movies.length === 0 && pathname === '/movies' && (
+        <div className='movies-list__error-message'>Ничего не найдено.</div>
+      )}
+      {savedMovies.length === 0 && pathname === '/saved-movies' && (
+        <div className='movies-list__error-message'>Список сохранённых фильмов пуст.</div>
+      )}
+      {pathname === '/movies' && movies.length > 0 && (
+        <button
+          className={`movies-list__button ${
+            count >= movies.length && 'movies-list__button_type_unactive'
+          }`}
+          type='button'
+          onClick={clickMore}
+        >
+          Ещё
+        </button>
+      )}
     </section>
   );
 }

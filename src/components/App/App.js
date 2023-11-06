@@ -15,7 +15,6 @@ import SideBar from '../SideBar/SideBar';
 import mainApi from '../../utils/MainApi';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import Preloader from '../Movies/Preloader/Preloader';
-import moviesApi from '../../utils/MoviesApi';
 
 function App() {
   const navigate = useNavigate();
@@ -62,22 +61,14 @@ function App() {
   async function handleSignOut() {
     await setIsLoggedIn(false);
     localStorage.removeItem('jwt');
-    // setAppIsReady(false);
+    localStorage.removeItem('allMovies');
+    localStorage.removeItem('searchInputString');
+    localStorage.removeItem('isShort');
+    localStorage.removeItem('savedSearchInputString');
+    localStorage.removeItem('savedIsShort');
+
     navigate('/');
   }
-
-  // useEffect(() => {
-  //   if (isLoggedIn) {
-  //     moviesApi
-  //       .getMovies()
-  //       .then(data => {
-  //         setAllMovie(data);
-  //       })
-  //       .catch(err => {
-  //         console.log(`Ошибка: ${err}`);
-  //       });
-  //   }
-  // }, [isLoggedIn]);
 
   useEffect(() => {
     if (isLoggedIn) {
@@ -89,8 +80,10 @@ function App() {
         })
         .catch(err => console.log(err));
       setAppIsReady(true);
+    } else {
+      setAppIsReady(true);
     }
-  }, [isLoggedIn, appIsReady]);
+  }, [isLoggedIn]);
 
   //обнуляет сообщение об ошибке при смене роута на signin/signup и в профиле
   useEffect(() => {
@@ -104,7 +97,7 @@ function App() {
       .editProfile(data.name, data.email, token)
       .then(currentUserInfo => {
         setCurrentUser(currentUserInfo);
-        console.log(currentUserInfo);
+
         setSuccess('Данные профиля изменены');
       })
       .catch(err => {
@@ -127,18 +120,6 @@ function App() {
         });
     }
   }, []);
-
-  // useEffect(() => {
-  //   const token = localStorage.getItem('jwt');
-  //   if (token) {
-  //     mainApi
-  //       .getSavedMovies(token)
-  //       .then(() => {})
-  //       .catch(err => {
-  //         console.log(`Ошибка: ${err}`);
-  //       });
-  //   }
-  // }, []);
 
   return !appIsReady ? (
     <Preloader />

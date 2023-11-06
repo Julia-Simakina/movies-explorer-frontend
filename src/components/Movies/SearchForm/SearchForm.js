@@ -1,8 +1,5 @@
 import './SearchForm.css';
 import SearchIcon from '../../../images/search-icon.svg';
-import useFormValidation from '../../../hooks/useFormValidation';
-import { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
 
 function SearchForm({ value, onChange, onSubmit, checked, handleChange, isValid }) {
   return (

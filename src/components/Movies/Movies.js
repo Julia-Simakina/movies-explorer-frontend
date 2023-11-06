@@ -1,14 +1,13 @@
+import './Movies.css';
 import Header from '../Header/Header';
 import SearchForm from './SearchForm/SearchForm';
 import MoviesCardList from './MoviesCardList/MoviesCardList';
 import Footer from '../Footer/Footer';
-import { useEffect, useState, useContext } from 'react';
+import { useEffect, useState } from 'react';
 import moviesApi from '../../utils/MoviesApi';
 import mainApi from '../../utils/MainApi';
-import { LoginContext } from '../../contexts/LoginContext';
 
 function Movies({ toggleSidebar }) {
-  const { isLoggedIn } = useContext(LoginContext);
   const [allMovies, setAllMovies] = useState(JSON.parse(localStorage.getItem('allMovies')) || []);
   const [filtredMovies, setFiltredMovies] = useState(allMovies);
   const [searchInputString, setSearchInputString] = useState(
@@ -86,7 +85,7 @@ function Movies({ toggleSidebar }) {
   return (
     <>
       <Header toggleSidebar={toggleSidebar} />
-      <main>
+      <main className='movies'>
         <SearchForm
           value={searchInputString}
           onChange={search}
