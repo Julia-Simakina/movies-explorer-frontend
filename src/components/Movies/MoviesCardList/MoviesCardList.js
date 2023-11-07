@@ -3,7 +3,15 @@ import { React, useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import './MoviesCardList.css';
 import MoviesCard from '../MoviesCard/MoviesCard';
-//import { movies } from '../../../utils/constants';
+import {
+  MAX_WIDTH_SCREEN,
+  MIN_WIDTH_SCREEN,
+  INIT_CARD_MAX_SCREEN,
+  INIT_CARD_MEDIUM_SCREEN,
+  INIT_CARD_MIN_SCREEN,
+  STEP_MAX_WIDTH_SCREEN,
+  STEP_MEDIUM_AND_MIN_WIDTH_SCREEN
+} from '../../../utils/constants';
 
 function MoviesCardList({ movies, serverError, savedMovies, setSavedMovies }) {
   const { pathname } = useLocation();
@@ -11,14 +19,14 @@ function MoviesCardList({ movies, serverError, savedMovies, setSavedMovies }) {
   const visibleCards = movies.slice(0, count);
 
   function addCards() {
-    const counter = { init: 12, step: 3 };
-    if (window.innerWidth < 1280) {
-      counter.init = 8;
-      counter.step = 2;
+    const counter = { init: INIT_CARD_MAX_SCREEN, step: STEP_MAX_WIDTH_SCREEN };
+    if (window.innerWidth < MAX_WIDTH_SCREEN) {
+      counter.init = INIT_CARD_MEDIUM_SCREEN;
+      counter.step = STEP_MEDIUM_AND_MIN_WIDTH_SCREEN;
     }
-    if (window.innerWidth < 768) {
-      counter.init = 5;
-      counter.step = 2;
+    if (window.innerWidth < MIN_WIDTH_SCREEN) {
+      counter.init = INIT_CARD_MIN_SCREEN;
+      counter.step = STEP_MEDIUM_AND_MIN_WIDTH_SCREEN;
     }
     return counter;
   }
@@ -27,13 +35,13 @@ function MoviesCardList({ movies, serverError, savedMovies, setSavedMovies }) {
     if (pathname === '/movies') {
       setCount(addCards().init);
       function printCardsForResize() {
-        if (window.innerWidth >= 1280) {
+        if (window.innerWidth >= MAX_WIDTH_SCREEN) {
           setCount(addCards().init);
         }
-        if (window.innerWidth < 1280) {
+        if (window.innerWidth < MAX_WIDTH_SCREEN) {
           setCount(addCards().init);
         }
-        if (window.innerWidth < 768) {
+        if (window.innerWidth < MIN_WIDTH_SCREEN) {
           setCount(addCards().init);
         }
       }
@@ -74,14 +82,16 @@ function MoviesCardList({ movies, serverError, savedMovies, setSavedMovies }) {
         </div>
       )}
 
+      {(movies.length === 0 || (movies.length === 0 && savedMovies.length !== 0)) && (
+        <div className='movies-list__error-message'>Ничего не найдено.</div>
+      )}
+
       {movies.length === 0 && pathname === '/movies' && !localStorage.allMovies && (
         <div className='movies-list__error-message'>
           Чтобы увидеть список фильмов, выполните поиск.
         </div>
       )}
-      {(movies.length === 0 || (movies.length === 0 && savedMovies.length !== 0)) && (
-        <div className='movies-list__error-message'>Ничего не найдено.</div>
-      )}
+
       {savedMovies.length === 0 && pathname === '/saved-movies' && (
         <div className='movies-list__error-message'>Список сохранённых фильмов пуст.</div>
       )}

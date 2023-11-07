@@ -16,26 +16,11 @@ function MoviesCard({ data, savedMovies, setSavedMovies }) {
 
   const [isLike, setIsLike] = useState(false);
 
-  // const token = localStorage.getItem('jwt');
-
   useEffect(() => {
     if (pathname === '/movies' && savedMovies) {
       setIsLike(savedMovies.some(item => data.id === item.movieId));
     } else if (pathname === '/saved-movies') setIsLike(true);
   }, [savedMovies]);
-
-  // useEffect(() => {
-  //   if (isLike) {
-  //     savedMovies;
-  //   }
-  // }, [isLike]);
-
-  // function fetchSavedMovies() {
-  //   mainApi
-  //     .getSavedMovies(token)
-  //     .then(res => setSavedMovies(res))
-  //     .catch(err => console.error(`Ошибка при загрузке сохраненных фильмов ${err}`));
-  // }
 
   //на "сохранить" на странице movies
   function handleLikeClick() {

@@ -75,12 +75,8 @@ function App() {
         .getUserData()
         .then(userInfo => {
           setCurrentUser(userInfo);
-          setAppIsReady(true);
         })
         .catch(err => console.log(err));
-      setAppIsReady(true);
-    } else {
-      setAppIsReady(true);
     }
   }, [isLoggedIn]);
 
@@ -116,8 +112,12 @@ function App() {
         })
         .catch(err => {
           console.log(`Ошибка: ${err}`);
-          setAppIsReady(false);
+          setAppIsReady(true);
+          setIsLoggedIn(false);
         });
+    } else {
+      setAppIsReady(true);
+      setIsLoggedIn(false);
     }
   }, []);
 
