@@ -4,6 +4,7 @@ import { LoginContext } from '../../contexts/LoginContext';
 
 const ProtectedRoute = ({ element: Component, ...props }) => {
   const { isLoggedIn } = useContext(LoginContext);
+  console.log(isLoggedIn);
   return isLoggedIn ? <Component {...props} /> : <Navigate to='/' replace />;
 };
 

@@ -36,21 +36,14 @@
 
 .movies-list__button:hover {
   cursor: pointer;
-  opacity: 0.7;
-}
 
-.movies-list__button_type_unactive {
   border: 1px solid #e8e8e8;
   background-color: #fff;
 }
 
-/* .movies-list__button_type_unactive:disabled {
-  visibility: hidden;
+.movies-list__button_type_unactive {
+  display: none;
 }
-
-.movies-list__button:disabled {
-  visibility: hidden;
-} */
 
 .movies-list__button_type_unactive:hover {
   cursor: default;

@@ -16,7 +16,7 @@ function MoviesCard({ data, savedMovies, setSavedMovies }) {
 
   const [isLike, setIsLike] = useState(false);
 
-  const token = localStorage.getItem('jwt');
+  // const token = localStorage.getItem('jwt');
 
   useEffect(() => {
     if (pathname === '/movies' && savedMovies) {
@@ -24,35 +24,43 @@ function MoviesCard({ data, savedMovies, setSavedMovies }) {
     } else if (pathname === '/saved-movies') setIsLike(true);
   }, [savedMovies]);
 
-  function fetchSavedMovies() {
-    mainApi
-      .getSavedMovies(token)
-      .then(res => setSavedMovies(res))
-      .catch(err => console.error(`Ошибка при загрузке сохраненных фильмов ${err}`));
-  }
+  // useEffect(() => {
+  //   if (isLike) {
+  //     savedMovies;
+  //   }
+  // }, [isLike]);
 
+  // function fetchSavedMovies() {
+  //   mainApi
+  //     .getSavedMovies(token)
+  //     .then(res => setSavedMovies(res))
+  //     .catch(err => console.error(`Ошибка при загрузке сохраненных фильмов ${err}`));
+  // }
+
+  //на "сохранить" на странице movies
   function handleLikeClick() {
     mainApi
       .addMovie(data, localStorage.jwt)
-      .then(() => {
-        setIsLike(true);
-        fetchSavedMovies();
-        // setSavedMovies([...savedMovies, data]);
+      .then(res => {
+        setSavedMovies(savedMovies => [res, ...savedMovies]);
       })
       .catch(err => console.error(`Ошибка при установке лайка ${err}`));
   }
 
+  //на галочку на странице movies
   function onClick() {
     const movieId = savedMovies.find(item => item.movieId === data.id)._id;
+
+    // fetchSavedMovies();
     onDelete(movieId);
   }
 
+  //на крестик или галочку на разных страницах
   function onDelete(deleteMovieId) {
     mainApi
       .deleteMovie(deleteMovieId, localStorage.jwt)
       .then(() => {
-        setIsLike(false);
-        fetchSavedMovies();
+        setSavedMovies(savedMovies.filter(item => item._id !== deleteMovieId));
       })
       .catch(err => console.error(`Ошибка при удалении фильма ${err}`));
   }

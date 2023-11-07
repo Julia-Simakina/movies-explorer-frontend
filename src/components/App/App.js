@@ -35,7 +35,6 @@ function App() {
       .then(() => {
         setErrortext('');
         handleLoginSubmit(data);
-        // navigate('/signin');
       })
       .catch(err => {
         setErrortext(err);
@@ -112,15 +111,17 @@ function App() {
       mainApi
         .checkToken(token)
         .then(() => {
+          setAppIsReady(true);
           setIsLoggedIn(true);
         })
         .catch(err => {
           console.log(`Ошибка: ${err}`);
-          setAppIsReady(true);
+          setAppIsReady(false);
         });
     }
   }, []);
 
+  console.log(isLoggedIn);
   return !appIsReady ? (
     <Preloader />
   ) : (

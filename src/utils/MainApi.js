@@ -108,9 +108,9 @@ class MainApi {
   }
 }
 
-const BASE_URL = 'https://api.movie.julias.nomoredomainsrocks.ru';
+// const BASE_URL = 'https://api.movie.julias.nomoredomainsrocks.ru';
 
-// const BASE_URL = 'http://localhost:3000';
+const BASE_URL = 'http://localhost:3000';
 //для локального просмотра используй локалхост 3001 вместо этого адреса
 
 const mainApi = new MainApi({

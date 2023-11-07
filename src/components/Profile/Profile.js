@@ -38,7 +38,6 @@ function Profile({ toggleSidebar, onSignOut, onUpdateUser, success }) {
     evt.preventDefault();
     setFormIsValid(false);
     setIsEdit(false);
-    // setIsSuccess(true);
     onUpdateUser({
       name: formValues.name,
       email: formValues.email
@@ -74,8 +73,6 @@ function Profile({ toggleSidebar, onSignOut, onUpdateUser, success }) {
                     value={formValues.name || ''}
                     disabled={!isEdit}
                     required
-
-                    // value={isEdit ? formValues['name'] : currentUser.name}
                   />
                 </div>
                 <span className='form-error'>{formErrors.name}</span>

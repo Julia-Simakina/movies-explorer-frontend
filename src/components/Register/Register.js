@@ -1,37 +1,14 @@
 import './Register.css';
-import { useState, useContext, useEffect } from 'react';
+import { useContext, useEffect } from 'react';
 import AuthForm from '../AuthForm/AuthForm';
 import useFormValidation from '../../hooks/useFormValidation';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
+import { emailRegex } from '../../utils/constants';
 
 function Register({ onRegister, errorText }) {
-  const {
-    formValues,
-    formErrors,
-    handleChange,
-    setFormValues,
-    formIsValid,
-    setFormIsValid,
-    resetForm
-  } = useFormValidation();
-  // const [name, setName] = useState('');
-  // const [email, setEmail] = useState('');
-  // const [password, setPassword] = useState('');
+  const { formValues, formErrors, handleChange, setFormValues, formIsValid, resetForm } =
+    useFormValidation();
 
-  // const handleInputName = e => {
-  //   setName(e.target.value);
-  // };
-  // const handleInputEmail = e => {
-  //   setEmail(e.target.value);
-  // };
-  // const handleInputPassword = e => {
-  //   setPassword(e.target.value);
-  // };
-
-  // const handleSubmitRegister = e => {
-  //   e.preventDefault();
-  //   onRegister(name, email, password);
-  // };
   const currentUser = useContext(CurrentUserContext);
 
   useEffect(() => {
@@ -78,12 +55,12 @@ function Register({ onRegister, errorText }) {
             E-mail
           </label>
           <input
+            pattern={emailRegex}
             name='email'
             type='email'
             id='email'
             className={`auth__form-input ${!formIsValid && 'auth__form-input_error_active'} `}
             placeholder='Введите E-mail'
-            // value={email}
             onChange={handleChange}
             required
           />
@@ -94,7 +71,6 @@ function Register({ onRegister, errorText }) {
             Пароль
           </label>
           <input
-            // value={password}
             name='password'
             onChange={handleChange}
             type='password'

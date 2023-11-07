@@ -4,6 +4,7 @@ import MoviesCardList from '../Movies/MoviesCardList/MoviesCardList';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 import mainApi from '../../utils/MainApi';
+import { useLocation } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 
 function SavedMovies({ toggleSidebar }) {
@@ -15,6 +16,7 @@ function SavedMovies({ toggleSidebar }) {
   const [isValid, setIsValid] = useState(true);
   const [filtredMovies, setFiltredMovies] = useState([]);
   const [isShort, setIsShort] = useState(JSON.parse(localStorage.getItem('savedIsShort') || false));
+  const pathname = useLocation();
 
   useEffect(() => {
     mainApi.getSavedMovies(token).then(res => {
@@ -56,13 +58,17 @@ function SavedMovies({ toggleSidebar }) {
   useEffect(() => {
     handleSubmitSearch();
     setIsValid(true);
-  }, [savedMovies]);
+  }, [savedMovies, isShort]);
 
   function checkShort(e) {
     const value = e.target.checked;
     setIsShort(value);
     localStorage.setItem('savedIsShort', value);
   }
+  useEffect(() => {
+    setIsShort(false);
+    setSearchInputString('');
+  }, [pathname]);
 
   return (
     <>

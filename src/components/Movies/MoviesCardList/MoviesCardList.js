@@ -79,7 +79,7 @@ function MoviesCardList({ movies, serverError, savedMovies, setSavedMovies }) {
           Чтобы увидеть список фильмов, выполните поиск.
         </div>
       )}
-      {movies.length === 0 && pathname === '/movies' && (
+      {(movies.length === 0 || (movies.length === 0 && savedMovies.length !== 0)) && (
         <div className='movies-list__error-message'>Ничего не найдено.</div>
       )}
       {savedMovies.length === 0 && pathname === '/saved-movies' && (

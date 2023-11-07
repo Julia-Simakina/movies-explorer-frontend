@@ -74,7 +74,7 @@ function Movies({ toggleSidebar }) {
   useEffect(() => {
     handleSubmitSearch();
     setIsValid(true);
-  }, [allMovies]);
+  }, [allMovies, isShort]);
 
   function checkShort(e) {
     const value = e.target.checked;

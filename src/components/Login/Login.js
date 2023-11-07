@@ -1,29 +1,13 @@
 import './Login.css';
-import { useState, useEffect, useContext } from 'react';
+import { useEffect, useContext } from 'react';
 import AuthForm from '../AuthForm/AuthForm';
 import useFormValidation from '../../hooks/useFormValidation';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
+import { emailRegex } from '../../utils/constants';
 
 function Login({ onLogin, errorText }) {
-  // const [email, setEmail] = useState('');
-  // const [password, setPassword] = useState('');
-
-  // const handleInputEmail = e => {
-  //   setEmail(e.target.value);
-  // };
-  // const handleInputPassword = e => {
-  //   setPassword(e.target.value);
-  // };
-
-  const {
-    formValues,
-    formErrors,
-    handleChange,
-    setFormValues,
-    formIsValid,
-    setFormIsValid,
-    resetForm
-  } = useFormValidation();
+  const { formValues, formErrors, handleChange, setFormValues, formIsValid, resetForm } =
+    useFormValidation();
 
   const currentUser = useContext(CurrentUserContext);
 
@@ -53,13 +37,13 @@ function Login({ onLogin, errorText }) {
             E-mail
           </label>
           <input
-            // onChange={handleInputEmail}
             type='email'
             name='email'
             id='email'
             onChange={handleChange}
             className={`auth__form-input ${!formIsValid && 'auth__form-input_error_active'} `}
             placeholder='Введите E-mail'
+            pattern={emailRegex}
             required
           />
           <span className='form-error'>{formErrors.email}</span>
@@ -69,7 +53,6 @@ function Login({ onLogin, errorText }) {
             Пароль
           </label>
           <input
-            // onChange={handleInputPassword}
             type='password'
             name='password'
             id='password'
