@@ -1,6 +1,8 @@
 .search-form-section {
   max-width: 1280px;
   padding: 70px;
+  display: flex;
+  flex-direction: column;
 }
 
 .search-form {
@@ -146,10 +148,24 @@
 }
 
 .search-form-section__separator {
-  margin: 69px auto 0;
-  width: 100%;
+  padding: 42px 0 0;
+  max-width: 100%;
   margin-bottom: 10px;
   border-bottom: 1px solid #e8e8e8;
+}
+
+.search-form__error {
+  font-size: 11px;
+  line-height: 11px;
+  font-weight: 400;
+  color: #ff4062;
+  min-height: 12px;
+  margin: 15px 0 0;
+  text-align: center;
+  visibility: hidden;
+}
+.search-form__error_type_active {
+  visibility: visible;
 }
 
 @media screen and (max-width: 1023px) {
@@ -174,7 +190,7 @@
   }
 
   .search-form-section__separator {
-    margin-top: 109px;
+    padding-top: 83px;
   }
 }
 

@@ -1,5 +1,4 @@
 .auth {
-  padding: 70px 0;
   margin: 0 auto;
   box-sizing: border-box;
   width: 396px;
@@ -7,7 +6,7 @@
   height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
 }
 
 .auth__logo {
@@ -30,7 +29,8 @@
 }
 
 .auth__form {
-  height: 100%;
+  height: calc(100vh - 287px);
+
   width: 396px;
   display: flex;
   flex-direction: column;
@@ -43,7 +43,6 @@
   border: none;
   display: flex;
   flex-direction: column;
-  gap: 10px;
 }
 
 .auth__form-container {
@@ -74,28 +73,32 @@
   font-size: 13px;
   line-height: 16px;
   font-weight: 400;
+  color: #000;
 }
 
 .auth__form-input::placeholder {
   color: #a0a0a0;
 }
 
-.auth__form-input_error_active::placeholder {
+.auth__form-input_error_active {
   color: #ff4062;
 }
 
-.auth__form-input-err-text {
+.form-error {
   font-size: 10px;
-  line-height: 12px;
+  line-height: 11px;
   font-weight: 400;
   color: #ff4062;
-  padding-top: 10px;
+  min-height: 20px;
+  min-height: 12px;
+  margin: 4px 0;
+  align-self: start;
 }
 
 .auth__submit-btn {
   width: 396px;
   height: 45px;
-  margin-top: 69px;
+  margin-top: 40px;
   color: #fff;
   font-size: 14px;
   background-color: #000;
@@ -104,14 +107,20 @@
   opacity: 1;
 }
 
+.auth__submit-btn:disabled {
+  background-color: #f8f8f8;
+  color: #c2c2c2;
+  cursor: default;
+}
+
+.auth__submit-btn:disabled:hover {
+  opacity: 1;
+  cursor: default;
+}
+
 .auth__submit-btn:hover {
   opacity: 0.8;
   cursor: pointer;
-}
-
-.auth__submit-btn_tupe_unactive {
-  background-color: #f8f8f8;
-  color: #c2c2c2;
 }
 
 .auth__to-signin {
@@ -145,16 +154,23 @@
   margin-top: 121px;
 }
 
+.auth__error {
+  color: #ff004c;
+  text-align: center;
+  display: block;
+  font-size: 14px;
+  margin: 20px auto;
+}
+
 @media screen and (max-width: 1023px) {
-  .auth {
-    padding: 232px 0;
+  .auth__form {
+    height: calc(100vh - 611px);
   }
 }
 
 @media screen and (max-width: 767px) {
   .auth {
     margin: 0 auto;
-    padding: 58px 0 30px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -163,6 +179,7 @@
 
   .auth__form {
     width: 260px;
+    height: calc(100vh - 283px);
   }
 
   .auth__submit-btn {
@@ -171,5 +188,14 @@
   .auth__to-signin {
     font-size: 12px;
     line-height: 15px;
+  }
+
+  .auth__title {
+    margin: 50px 0 80px;
+    text-align: center;
+  }
+
+  .auth__logo {
+    margin: 0 auto;
   }
 }

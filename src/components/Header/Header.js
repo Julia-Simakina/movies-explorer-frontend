@@ -3,11 +3,14 @@ import logo from '../../images/logo.svg';
 import Navigation from '../Navigation/Navigation';
 import { useLocation } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import { useContext } from 'react';
+import { LoginContext } from '../../contexts/LoginContext';
 
-function Header({ name, toggleSidebar }) {
+function Header({ toggleSidebar }) {
+  const { isLoggedIn } = useContext(LoginContext);
   const { pathname } = useLocation();
 
-  return name === 'logged' ? (
+  return isLoggedIn ? (
     <header className={`header ${pathname === '/' ? 'header_background_pink' : ''}`}>
       <div className='header__content'>
         <Link to='/'>

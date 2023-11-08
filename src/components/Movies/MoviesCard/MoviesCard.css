@@ -33,12 +33,29 @@
   font-weight: 400;
   line-height: 9px;
   text-align: center;
+  opacity: 0;
+  transition: opacity 0.2s linear;
+}
+
+.card-movie__container:hover .card-movie__btn_type_save {
+  opacity: 0.7;
+}
+
+.card-movie__container:hover .card-movie__btn_type_save:hover {
+  opacity: 1;
+  cursor: pointer;
 }
 
 .card-movie__btn_type_saved {
   width: 21px;
   height: 21px;
+  background: none;
   background-image: url(../../../images/saved_movie.svg);
+  cursor: pointer;
+  opacity: 0.7;
+}
+.card-movie__btn_type_saved:hover {
+  opacity: 1;
 }
 
 .card-movie__btn_type_delete {
@@ -46,6 +63,15 @@
   height: 21px;
   background: none;
   background-image: url(../../../images/del_card.svg);
+  cursor: pointer;
+  opacity: 0;
+}
+
+.card-movie__container:hover .card-movie__btn_type_delete {
+  opacity: 0.7;
+}
+.card-movie__container:hover .card-movie__btn_type_delete:hover {
+  opacity: 1;
 }
 
 .card-movie__data {

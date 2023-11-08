@@ -6,7 +6,6 @@
   display: flex;
   align-items: center;
   flex-direction: column;
-  justify-content: space-between;
 }
 
 .profile__title {
@@ -15,6 +14,12 @@
   line-height: 29px;
   font-weight: 500;
   text-align: center;
+}
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
 }
 
 .form__container {
@@ -46,6 +51,7 @@
 }
 
 .form__input {
+  width: 300px;
   padding: 0;
   border: none;
   text-align: right;
@@ -55,13 +61,24 @@
   font-weight: 400;
 }
 
+.form__input:focus {
+  outline: none;
+  border-bottom: 1px solid #e8e8e8;
+}
+
+.form__input:disabled {
+  background-color: #fff;
+}
+
 .form__input::placeholder {
-  color: #000;
+  color: #a0a0a0;
 }
 .profile__edit {
   display: flex;
   flex-direction: column;
   gap: 16px;
+
+  margin: 80px auto 0;
 }
 
 .profile__edit-btn {
@@ -89,6 +106,47 @@
   opacity: 0.7;
 }
 
+.profile__save-btn {
+  width: 396px;
+  height: 45px;
+  color: #fff;
+  font-size: 14px;
+  background-color: #000;
+  border: none;
+  border-radius: 3px;
+  opacity: 1;
+}
+
+.profile__save-btn:disabled {
+  background-color: #f8f8f8;
+  color: #c2c2c2;
+  cursor: default;
+}
+
+.profile__save-btn:disabled:hover {
+  opacity: 1;
+  cursor: default;
+}
+
+.profile__save-btn:disabled {
+  background-color: #f8f8f8;
+  color: #c2c2c2;
+  cursor: default;
+}
+
+.profile__save-btn:hover {
+  opacity: 0.8;
+  cursor: pointer;
+}
+
+.profile__success-edit {
+  color: #0bb95d;
+}
+
+.profile__unsuccess-edit {
+  color: #ff004c;
+}
+
 @media screen and (max-width: 1023px) {
   .profile__content {
     margin: 0 auto;
@@ -101,6 +159,13 @@
 
   .form__container {
     margin-top: 80px;
+  }
+
+  .profile__title {
+    width: 410px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
   }
 }
 
@@ -131,5 +196,9 @@
   .profile__exit {
     font-size: 12px;
     line-height: 15px;
+  }
+
+  .profile__title {
+    width: 260px;
   }
 }

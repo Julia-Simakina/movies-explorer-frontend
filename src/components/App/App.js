@@ -1,8 +1,10 @@
-import { useState } from 'react';
-import { Route, Routes } from 'react-router-dom';
-//import { Context } from '../../contexts/Context';
-import PageNotFound from '../PageNotFound/PageNotFound';
+import { useState, useEffect } from 'react';
+import { Route, Routes, useNavigate, useLocation, Navigate } from 'react-router-dom';
+import CurrentUserContext from '../../contexts/CurrentUserContext';
+import { LoginContext } from '../../contexts/LoginContext';
+
 import './App.css';
+import PageNotFound from '../PageNotFound/PageNotFound';
 import Main from '../Main/Main';
 import Movies from '../Movies/Movies';
 import SavedMovies from '../SavedMovies/SavedMovies';
@@ -10,24 +12,199 @@ import Profile from '../Profile/Profile';
 import Register from '../Register/Register';
 import Login from '../Login/Login';
 import SideBar from '../SideBar/SideBar';
+import mainApi from '../../utils/MainApi';
+import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
+import Preloader from '../Movies/Preloader/Preloader';
 
 function App() {
-  const [isOpenSideBar, setIsOpenSideBar] = useState(false);
+  const navigate = useNavigate();
+  const pathname = useLocation();
   const toggleSidebar = () => setIsOpenSideBar(open => !open);
 
-  return (
-    <div className='page'>
-      <Routes>
-        <Route path='/signin' element={<Login />} />
-        <Route path='/signup' element={<Register />} />
-        <Route path='/profile' element={<Profile toggleSidebar={toggleSidebar} />} />
-        <Route path='/saved-movies' element={<SavedMovies toggleSidebar={toggleSidebar} />} />
-        <Route path='/movies' element={<Movies toggleSidebar={toggleSidebar} />} />
-        <Route path='/' element={<Main toggleSidebar={toggleSidebar} />} />
-        <Route path='*' element={<PageNotFound />} />
-      </Routes>
-      <SideBar isOpen={isOpenSideBar} toggleSidebar={toggleSidebar} />
-    </div>
+  const [currentUser, setCurrentUser] = useState({});
+  const [isOpenSideBar, setIsOpenSideBar] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [errorText, setErrortext] = useState('');
+  const [success, setSuccess] = useState('');
+  const [appIsReady, setAppIsReady] = useState(false);
+
+  //Регистрация
+  function handleRegisterSubmit(data) {
+    mainApi
+      .register(data.name, data.email, data.password)
+      .then(() => {
+        setErrortext('');
+        handleLoginSubmit(data);
+      })
+      .catch(err => {
+        setErrortext(err);
+      });
+  }
+
+  //Авторизация
+  function handleLoginSubmit(data) {
+    mainApi
+      .login(data.email, data.password)
+      .then(res => {
+        localStorage.setItem('jwt', res.token);
+        setErrortext('');
+        setIsLoggedIn(true);
+        navigate('/movies');
+      })
+      .catch(err => {
+        setErrortext(err);
+      });
+  }
+
+  //Выход
+  async function handleSignOut() {
+    await setIsLoggedIn(false);
+    localStorage.removeItem('jwt');
+    localStorage.removeItem('allMovies');
+    localStorage.removeItem('searchInputString');
+    localStorage.removeItem('isShort');
+    localStorage.removeItem('savedSearchInputString');
+    localStorage.removeItem('savedIsShort');
+
+    navigate('/');
+  }
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      mainApi
+        .getUserData()
+        .then(userInfo => {
+          setCurrentUser(userInfo);
+        })
+        .catch(err => console.log(err));
+    }
+  }, [isLoggedIn]);
+
+  //обнуляет сообщение об ошибке при смене роута на signin/signup и в профиле
+  useEffect(() => {
+    setErrortext('');
+    setSuccess('');
+  }, [pathname]);
+
+  function handleUpdateUser(data) {
+    const token = localStorage.getItem('jwt');
+    mainApi
+      .editProfile(data.name, data.email, token)
+      .then(currentUserInfo => {
+        setCurrentUser(currentUserInfo);
+
+        setSuccess('Данные профиля изменены');
+      })
+      .catch(err => {
+        setSuccess('Ошибка при сохранении');
+        console.log(`Ошибка: ${err}`);
+      });
+  }
+
+  useEffect(() => {
+    const token = localStorage.getItem('jwt');
+    if (token) {
+      mainApi
+        .checkToken(token)
+        .then(() => {
+          setAppIsReady(true);
+          setIsLoggedIn(true);
+        })
+        .catch(err => {
+          console.log(`Ошибка: ${err}`);
+          setAppIsReady(true);
+          setIsLoggedIn(false);
+        });
+    } else {
+      setAppIsReady(true);
+      setIsLoggedIn(false);
+    }
+  }, []);
+
+  console.log(isLoggedIn);
+  return !appIsReady ? (
+    <Preloader />
+  ) : (
+    <LoginContext.Provider value={{ isLoggedIn }}>
+      <CurrentUserContext.Provider value={currentUser}>
+        <div className='page'>
+          <Routes>
+            <Route
+              path='/signin'
+              element={
+                isLoggedIn ? (
+                  <Navigate to='/movies' replace />
+                ) : (
+                  <Login
+                    onLogin={handleLoginSubmit}
+                    errorText={errorText}
+                    isLoggedIn={isLoggedIn}
+                  />
+                )
+              }
+            />
+            <Route
+              path='/signup'
+              element={
+                isLoggedIn ? (
+                  <Navigate to='/movies' replace />
+                ) : (
+                  <Register
+                    onRegister={handleRegisterSubmit}
+                    errorText={errorText}
+                    isLoggedIn={isLoggedIn}
+                  />
+                )
+              }
+            />
+            <Route
+              path='/profile'
+              element={
+                <ProtectedRoute
+                  isLoggedIn={isLoggedIn}
+                  element={Profile}
+                  toggleSidebar={toggleSidebar}
+                  onSignOut={handleSignOut}
+                  onUpdateUser={handleUpdateUser}
+                  success={success}
+                />
+              }
+            />
+            <Route
+              path='/saved-movies'
+              element={
+                <ProtectedRoute
+                  element={SavedMovies}
+                  toggleSidebar={toggleSidebar}
+                  isLoggedIn={isLoggedIn}
+                />
+              }
+            />
+            <Route
+              path='/movies'
+              element={
+                <ProtectedRoute
+                  element={Movies}
+                  toggleSidebar={toggleSidebar}
+                  isLoggedIn={isLoggedIn}
+                />
+              }
+            />
+            <Route
+              path='/'
+              element={<Main toggleSidebar={toggleSidebar} isLoggedIn={isLoggedIn} />}
+            />
+            <Route path='*' element={<PageNotFound isLoggedIn={isLoggedIn} />} />
+          </Routes>
+          <SideBar
+            isOpen={isOpenSideBar}
+            toggleSidebar={toggleSidebar}
+            isLoggedIn={isLoggedIn}
+            onClick={toggleSidebar}
+          />
+        </div>
+      </CurrentUserContext.Provider>
+    </LoginContext.Provider>
   );
 }
 export default App;

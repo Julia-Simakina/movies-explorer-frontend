@@ -10,7 +10,7 @@ import AboutMe from './AboutMe/AboutMe';
 function Main({ toggleSidebar }) {
   return (
     <>
-      <Header name='logged' toggleSidebar={toggleSidebar} />
+      <Header toggleSidebar={toggleSidebar} />
       <main className='main'>
         <Promo />
         <NavTab />
